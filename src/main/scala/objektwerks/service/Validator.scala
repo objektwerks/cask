@@ -1,6 +1,8 @@
-package objektwerks
+package objektwerks.service
 
-import objektwerks.Validators.*
+import objektwerks.entity.Validators.*
+import objektwerks.entity.*
+import objektwerks.service.Handler
 
 class Validator(handler: Handler):
   def validate(command: Command): Event =

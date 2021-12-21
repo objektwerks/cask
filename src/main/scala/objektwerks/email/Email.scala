@@ -1,4 +1,4 @@
-package objektwerks
+package objektwerks.email
 
 final case class Email(id: String,
                        license: String,

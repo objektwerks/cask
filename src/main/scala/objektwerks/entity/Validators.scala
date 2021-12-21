@@ -1,4 +1,4 @@
-package objektwerks
+package objektwerks.entity
 
 object Validators:
   extension (value: String)
@@ -86,7 +86,7 @@ object Validators:
 
   extension (measurement: Measurement)
     def isValid: Boolean =
-      import Measurement.*
+      import objektwerks.entity.Measurement.*
       measurement.id >= 0 &&
         measurement.poolId > 0 &&
         measurement.measured > 0 &&

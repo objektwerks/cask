@@ -4,6 +4,9 @@ import cask.endpoints.postJson
 import cask.main.MainRoutes
 import cask.model.Request
 
+import objektwerks.entity.{Command, Serializers}
+import objektwerks.service.{Authorizer, Handler, Service, Store, Validator}
+
 import upickle.default.{read, write}
 
 trait Router extends MainRoutes:

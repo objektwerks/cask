@@ -1,4 +1,6 @@
-package objektwerks
+package objektwerks.service
+
+import objektwerks.entity.*
 
 class Handler(service: Service):
   def handle(command: Command): Event =

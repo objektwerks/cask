@@ -1,4 +1,4 @@
-package objektwerks
+package objektwerks.datetime
 
 import java.time.{Instant, LocalDate, LocalTime, format}
 

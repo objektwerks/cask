@@ -1,8 +1,10 @@
-package objektwerks
+package objektwerks.entity
 
 import java.util.UUID
 
 import scala.util.Random
+
+import objektwerks.datetime.DateTime
 
 enum UoM(val abrv: String):
   case ounce extends UoM("oz")

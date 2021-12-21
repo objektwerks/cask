@@ -1,4 +1,6 @@
-package objektwerks
+package objektwerks.entity
+
+import objektwerks.datetime.DateTime
 
 sealed trait Event
 

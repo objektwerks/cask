@@ -1,4 +1,6 @@
-package objektwerks
+package objektwerks.service
+
+import objektwerks.entity.*
 
 import scala.util.Try
 

@@ -1,8 +1,8 @@
-package objektwerks
-
-import upickle.default.*
+package objektwerks.entity
 
 object Serializers:
+  import upickle.default._
+
   given accountRW: ReadWriter[Account] = macroRW
   given poolRW: ReadWriter[Pool] = macroRW
   given surfaceRW: ReadWriter[Surface] = macroRW
@@ -90,11 +90,14 @@ object Serializers:
 
   given registeringRW: ReadWriter[Registered] = macroRW
   given loggedInRW: ReadWriter[LoggedIn] = macroRW
+
   given deactivatedRW: ReadWriter[Deactivated] = macroRW
   given reactivatedRW: ReadWriter[Reactivated] = macroRW
+
   given listedRW: ReadWriter[Listed] = macroRW
   given addedRW: ReadWriter[Added] = macroRW
   given updatedRW: ReadWriter[Updated] = macroRW
+
   given faultRW: ReadWriter[Fault] = macroRW
 
   given eventRW: ReadWriter[Event] = ReadWriter.merge(
