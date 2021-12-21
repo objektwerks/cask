@@ -1,4 +1,4 @@
-package objektwerks.model
+package objektwerks
 
 import java.time.{Instant, LocalDate, LocalTime, format}
 

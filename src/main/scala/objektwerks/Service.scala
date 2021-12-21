@@ -1,4 +1,4 @@
-package objektwerks.model
+package objektwerks
 
 import scala.util.Try
 

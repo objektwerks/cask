@@ -1,7 +1,7 @@
-package objektwerks.model
+package objektwerks
 
 object Serializers:
-  import upickle.default._
+  import upickle.default.*
 
   given accountRW: ReadWriter[Account] = macroRW
   given poolRW: ReadWriter[Pool] = macroRW
@@ -24,6 +24,7 @@ object Serializers:
 
   given registerRW: ReadWriter[Register] = macroRW
   given loginRW: ReadWriter[Login] = macroRW
+
   given deactivateRW: ReadWriter[Deactivate] = macroRW
   given reactivateRW: ReadWriter[Reactivate] = macroRW
 

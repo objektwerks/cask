@@ -1,4 +1,4 @@
-package objektwerks.model
+package objektwerks
 
 class Handler(service: Service):
   def handle(command: Command): Event =

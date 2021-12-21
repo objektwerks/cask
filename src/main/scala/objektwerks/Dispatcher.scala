@@ -1,4 +1,4 @@
-package objektwerks.model
+package objektwerks
 
 class Dispatcher(authorizer: Authorizer, validator: Validator):
   def dispatch(command: Command): Event =

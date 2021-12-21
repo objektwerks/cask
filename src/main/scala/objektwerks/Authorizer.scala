@@ -1,4 +1,4 @@
-package objektwerks.model
+package objektwerks
 
 class Authorizer(service: Service):
   def authorize(command: Command): Event =

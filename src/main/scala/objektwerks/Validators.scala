@@ -1,9 +1,9 @@
-package objektwerks.model
+package objektwerks
 
 object Validators:
   extension (value: String)
     def isLicense: Boolean = if value.nonEmpty then value.length == 36 else false
-    def isEmail: Boolean = value.nonEmpty && value.length >=3 && value.contains("@")
+    def isEmail: Boolean = value.nonEmpty && value.length >= 3 && value.contains("@")
     def isPin: Boolean = value.length == 9
 
   extension (register: Register)
@@ -34,10 +34,10 @@ object Validators:
 
   extension (pool: Pool) def isValid =
     pool.id >= 0 &&
-    pool.license.isLicense &&
-    pool.name.nonEmpty &&
-    pool.built > 0 &&
-    pool.volume >= 1000
+      pool.license.isLicense &&
+      pool.name.nonEmpty &&
+      pool.built > 0 &&
+      pool.volume >= 1000
 
   extension (surface: Surface)
     def isValid: Boolean =
@@ -86,7 +86,7 @@ object Validators:
 
   extension (measurement: Measurement)
     def isValid: Boolean =
-      import Measurement._
+      import Measurement.*
       measurement.id >= 0 &&
         measurement.poolId > 0 &&
         measurement.measured > 0 &&
@@ -130,4 +130,4 @@ object Validators:
         repair.poolId > 0 &&
         repair.repaired > 0 &&
         repair.repair.nonEmpty &&
-          repair.cost > 0.00
+        repair.cost > 0.00

@@ -1,11 +1,11 @@
-package objektwerks.model
+package objektwerks
 
-import java.time._
+import java.time.*
 
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
-import DateTime._
+import objektwerks.DateTime.*
 
 class DateTimeTest extends AnyFunSuite with Matchers:
   test("low date") {

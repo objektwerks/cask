@@ -1,19 +1,18 @@
-package objektwerks.model
+package objektwerks
 
+import cask.endpoints.postJson
 import cask.main.MainRoutes
 import cask.model.Request
-import cask.endpoints.postJson
+import upickle.default.{read, write}
 
-import upickle.default._
-
-trait Router extends MainRoutes:
+trait Router extends MainRoutes :
   val store = Store()
   val service = Service(store)
   val authorizer = Authorizer(service)
   val handler = Handler(service)
   val validator = Validator(handler)
   val dispatcher = Dispatcher(authorizer, validator)
-  
+
   override def port: Int = 7272
 
   override def host: String = "localhost"

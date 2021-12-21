@@ -1,6 +1,6 @@
-package objektwerks.model
+package objektwerks
 
-import Validators._
+import objektwerks.Validators.*
 
 class Validator(handler: Handler):
   def validate(command: Command): Event =

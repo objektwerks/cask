@@ -1,6 +1,6 @@
-package objektwerks.model
+package objektwerks
 
-final case class Email(id : String,
+final case class Email(id: String,
                        license: String,
                        address: String,
                        message: String,

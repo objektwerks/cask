@@ -1,10 +1,10 @@
-package objektwerks.model
+package objektwerks
+
+import objektwerks.UoM.*
+import objektwerks.Validators.*
 
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
-
-import UoM._
-import Validators._
 
 class ModelTest extends AnyFunSuite with Matchers:
   val store = Store()
