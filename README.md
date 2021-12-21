@@ -1,6 +1,6 @@
 Cask
 ----
->Cask feature tests, to include a model with uPickle and scala-java-time.
+>Cask feature tests, to include model, using Scala 3.
 
 Test
 ----
