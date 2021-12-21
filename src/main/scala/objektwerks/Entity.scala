@@ -1,8 +1,7 @@
 package objektwerks
 
-import objektwerks.Account.newLicense
-
 import java.util.UUID
+
 import scala.util.Random
 
 enum UoM(val abrv: String):
