@@ -2,6 +2,7 @@ package objektwerks
 
 import objektwerks.entity.Serializers.given
 import objektwerks.entity.{Register, Registered}
+
 import upickle.default.*
 
 object Client:
