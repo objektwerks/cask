@@ -1,7 +1,7 @@
 package objektwerks.service
 
 import objektwerks.datetime.DateTime
-import objektwerks.email.{Email, Emailer}
+import objektwerks.email.*
 import objektwerks.entity.*
 
 import scala.collection.mutable
