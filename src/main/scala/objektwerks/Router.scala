@@ -5,7 +5,7 @@ import cask.main.MainRoutes
 import cask.model.Request
 
 import objektwerks.entity.{Command, Serializers}
-import objektwerks.service.{Authorizer, Handler, Service, Store, Validator}
+import objektwerks.service.*
 
 import upickle.default.{read, write}
 
