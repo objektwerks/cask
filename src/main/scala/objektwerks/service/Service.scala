@@ -1,6 +1,7 @@
 package objektwerks.service
 
 import objektwerks.entity.*
+import objektwerks.event.{Authorized, Event, Unauthorized}
 
 import scala.util.Try
 

@@ -3,10 +3,9 @@ package objektwerks
 import cask.endpoints.postJson
 import cask.main.MainRoutes
 import cask.model.Request
-
-import objektwerks.entity.{Command, Serializers}
+import objektwerks.command.Command
+import objektwerks.entity.Serializers
 import objektwerks.service.*
-
 import upickle.default.{read, write}
 
 trait Router extends MainRoutes:

@@ -1,4 +1,6 @@
-package objektwerks.entity
+package objektwerks.command
+
+import objektwerks.entity.*
 
 sealed trait License:
   val license: String

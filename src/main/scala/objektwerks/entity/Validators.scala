@@ -1,5 +1,7 @@
 package objektwerks.entity
 
+import objektwerks.command.{Deactivate, Login, Reactivate, Register}
+
 object Validators:
   extension (value: String)
     def isLicense: Boolean = if value.nonEmpty then value.length == 36 else false

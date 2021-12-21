@@ -1,7 +1,10 @@
 package objektwerks.entity
 
+import objektwerks.command.*
+import objektwerks.event.*
+
 object Serializers:
-  import upickle.default._
+  import upickle.default.*
 
   given accountRW: ReadWriter[Account] = macroRW
   given poolRW: ReadWriter[Pool] = macroRW
@@ -88,7 +91,7 @@ object Serializers:
     addRepairRW, updateRepairRW
   )
 
-  given registeringRW: ReadWriter[Registered] = macroRW
+  given registeredRW: ReadWriter[Registered] = macroRW
   given loggedInRW: ReadWriter[LoggedIn] = macroRW
 
   given deactivatedRW: ReadWriter[Deactivated] = macroRW
@@ -101,5 +104,5 @@ object Serializers:
   given faultRW: ReadWriter[Fault] = macroRW
 
   given eventRW: ReadWriter[Event] = ReadWriter.merge(
-    registeringRW, loggedInRW, deactivatedRW, reactivatedRW, listedRW, addedRW, updatedRW, faultRW
+    registeredRW, loggedInRW, deactivatedRW, reactivatedRW, listedRW, addedRW, updatedRW, faultRW
   )
