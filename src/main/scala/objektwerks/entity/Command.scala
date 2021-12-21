@@ -1,4 +1,4 @@
-package objektwerks.command
+package objektwerks.entity
 
 import objektwerks.entity.*
 

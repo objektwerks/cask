@@ -1,12 +1,11 @@
 package objektwerks
 
-import objektwerks.command.{AddChemical, AddCleaning, AddHeater, AddHeaterSetting, AddMeasurement, AddPool, AddPump, AddRepair, AddSupply, AddSurface, AddTimer, AddTimerSetting, Deactivate, ListChemicals, ListCleanings, ListHeaterSettings, ListHeaters, ListMeasurements, ListPools, ListPumps, ListRepairs, ListSupplies, ListSurfaces, ListTimerSettings, ListTimers, Login, Reactivate, Register, UpdateChemical, UpdateCleaning, UpdateHeater, UpdateHeaterSetting, UpdateMeasurement, UpdatePool, UpdatePump, UpdateRepair, UpdateSupply, UpdateSurface, UpdateTimer, UpdateTimerSetting}
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
+
 import objektwerks.entity.*
 import objektwerks.entity.UoM.*
 import objektwerks.entity.Validators.*
-import objektwerks.event.{Added, Deactivated, Fault, Listed, LoggedIn, Reactivated, Registered, Updated}
 import objektwerks.service.*
 
 class DispatcherTest extends AnyFunSuite with Matchers:

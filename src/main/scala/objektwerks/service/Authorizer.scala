@@ -1,7 +1,6 @@
 package objektwerks.service
 
-import objektwerks.command.{Command, License}
-import objektwerks.event.{Authorized, Event}
+import objektwerks.entity.*
 
 class Authorizer(service: Service):
   def authorize(command: Command): Event =

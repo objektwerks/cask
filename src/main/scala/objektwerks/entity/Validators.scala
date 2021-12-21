@@ -1,6 +1,6 @@
 package objektwerks.entity
 
-import objektwerks.command.{Deactivate, Login, Reactivate, Register}
+import objektwerks.entity.Reactivate
 
 object Validators:
   extension (value: String)

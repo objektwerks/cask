@@ -1,9 +1,7 @@
 package objektwerks.service
 
-import objektwerks.command.*
 import objektwerks.entity.*
 import objektwerks.entity.Validators.*
-import objektwerks.event.{Event, Fault}
 import objektwerks.service.Handler
 
 class Validator(handler: Handler):

@@ -1,8 +1,5 @@
 package objektwerks.entity
 
-import objektwerks.command.*
-import objektwerks.event.*
-
 object Serializers:
   import upickle.default.*
 

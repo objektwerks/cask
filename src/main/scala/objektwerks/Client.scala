@@ -1,9 +1,7 @@
 package objektwerks
 
-import objektwerks.command.Register
-import objektwerks.event.Registered
-import objektwerks.entity.Serializers.{registerRW, registeredRW}
-
+import objektwerks.entity.Serializers.given
+import objektwerks.entity.{Register, Registered}
 import upickle.default.*
 
 object Client:
