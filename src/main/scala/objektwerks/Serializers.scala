@@ -1,8 +1,8 @@
 package objektwerks
 
-object Serializers:
-  import upickle.default.*
+import upickle.default.*
 
+object Serializers:
   given accountRW: ReadWriter[Account] = macroRW
   given poolRW: ReadWriter[Pool] = macroRW
   given surfaceRW: ReadWriter[Surface] = macroRW
