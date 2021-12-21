@@ -1,11 +1,12 @@
 package objektwerks
 
 import cask.main.Main
+
 import io.undertow.Undertow
 
 import scala.io.StdIn
 
-object Server extends Router :
+object Server extends Router:
   override def main(args: Array[String]): Unit =
     if (!verbose) Main.silenceJboss()
     val server = Undertow.builder
