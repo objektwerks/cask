@@ -8,7 +8,7 @@ import objektwerks.entity.UoM.*
 import objektwerks.entity.Validators.*
 import objektwerks.service.*
 
-class ModelTest extends AnyFunSuite with Matchers:
+class DispatcherTest extends AnyFunSuite with Matchers:
   val store = Store()
   val service = Service(store)
   val authorizer = Authorizer(service)
