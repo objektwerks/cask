@@ -1,6 +1,7 @@
 package objektwerks
 
 import cask.main.Main
+
 import io.undertow.Undertow
 
 import scala.io.StdIn
