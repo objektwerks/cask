@@ -1,7 +1,6 @@
-package objektwerks
+package objektwerks.service
 
 import objektwerks.entity.{Command, Event, Unauthorized}
-import objektwerks.service.{Authorizer, Validator}
 
 class Dispatcher(authorizer: Authorizer, validator: Validator):
   def dispatch(command: Command): Event =
