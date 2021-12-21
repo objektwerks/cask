@@ -3,9 +3,12 @@ package objektwerks
 import cask.endpoints.postJson
 import cask.main.MainRoutes
 import cask.model.Request
-import objektwerks.entity.{Command, Serializers}
+
+import objektwerks.entity.{Command, Event}
+import objektwerks.entity.Serializers.given
 import objektwerks.service.*
-import upickle.default.{read, write}
+
+import upickle.default.*
 
 trait Router extends MainRoutes:
   val store = Store()
@@ -23,11 +26,11 @@ trait Router extends MainRoutes:
   def onCommand(request: Request) =
     println(s"*** Request: $request")
 
-    val command = read[Command](request.bytes)(using Serializers.commandRW)
+    val command = read[Command](request.bytes)
     println(s"*** Command: $command")
 
     val event = dispatcher.dispatch(command)
     println(s"*** Event: $event")
-    write(event)(using Serializers.eventRW)
+    write[Event](event)
 
   initialize()
