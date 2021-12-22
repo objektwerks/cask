@@ -8,6 +8,7 @@ libraryDependencies ++= {
     "com.lihaoyi" %% "upickle" % "1.4.3",
     "com.lihaoyi" %% "requests" % "0.7.0",
     "io.github.cquiroz" %% "scala-java-time" % "2.3.0",
+    "ch.qos.logback" % "logback-classic" % "1.2.9",
     "org.scalatest" %% "scalatest" % "3.2.10" % Test
   )
 }
