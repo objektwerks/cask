@@ -26,7 +26,7 @@ trait Router extends MainRoutes:
   def command(request: Request) =
     println(s"*** Request: $request")
 
-    val command = read[Command](request.bytes)
+    val command = read[Command](request.text())
     println(s"*** Command: $command")
 
     val event = dispatcher.dispatch(command)
