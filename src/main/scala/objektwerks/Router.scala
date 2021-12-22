@@ -22,7 +22,7 @@ trait Router extends MainRoutes:
   override def host: String = "localhost"
   override def main(args: Array[String]): Unit = ()
 
-  @postJson("/command")
+  @cask.postJson("/command")
   def command(request: Request) =
     println(s"*** Request: $request")
 
