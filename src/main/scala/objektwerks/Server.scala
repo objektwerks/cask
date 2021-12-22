@@ -1,6 +1,7 @@
 package objektwerks
 
 import cask.main.Main
+import com.typesafe.scalalogging.LazyLogging
 
 import io.undertow.Undertow
 
@@ -8,7 +9,7 @@ import objektwerks.service.*
 
 import scala.io.StdIn
 
-object Server extends Main:
+object Server extends Main with LazyLogging:
   val store = Store()
   val service = Service(store)
   val authorizer = Authorizer(service)
@@ -29,8 +30,12 @@ object Server extends Main:
       .build
 
     server.start()
-    println(s"*** Server started at http://$host:$port/\nPress RETURN to stop...")
+    val started = s"*** Server started at http://$host:$port/\nPress RETURN to stop..."
+    println(started)
+    logger.info(started)
 
     StdIn.readLine()
     server.stop()
-    println(s"*** Server stopped!")
+    val stopped = s"*** Server stopped!"
+    println(stopped)
+    logger.info(stopped)
