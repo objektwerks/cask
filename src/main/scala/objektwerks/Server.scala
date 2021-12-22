@@ -6,7 +6,12 @@ import io.undertow.Undertow
 
 import scala.io.StdIn
 
-object Server extends Router:
+object Server extends Main:
+  val allRoutes = Seq(Router())
+
+  override def port: Int = 7272
+  override def host: String = "localhost"
+
   override def main(args: Array[String]): Unit =
     if (!verbose) Main.silenceJboss()
     val server = Undertow.builder

@@ -1,7 +1,7 @@
 package objektwerks
 
 import cask.endpoints.postJson
-import cask.main.MainRoutes
+import cask.main.Routes
 import cask.model.Request
 
 import objektwerks.entity.{Command, Event}
@@ -10,17 +10,13 @@ import objektwerks.service.*
 
 import upickle.default.*
 
-trait Router extends MainRoutes:
+case class Router() extends Routes:
   val store = Store()
   val service = Service(store)
   val authorizer = Authorizer(service)
   val handler = Handler(service)
   val validator = Validator(handler)
   val dispatcher = Dispatcher(authorizer, validator)
-
-  override def port: Int = 7272
-  override def host: String = "localhost"
-  override def main(args: Array[String]): Unit = ()
 
   @cask.postJson("/command")
   def command(request: Request) =
