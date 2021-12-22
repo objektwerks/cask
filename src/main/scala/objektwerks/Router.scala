@@ -10,14 +10,7 @@ import objektwerks.service.*
 
 import upickle.default.*
 
-case class Router() extends Routes:
-  val store = Store()
-  val service = Service(store)
-  val authorizer = Authorizer(service)
-  val handler = Handler(service)
-  val validator = Validator(handler)
-  val dispatcher = Dispatcher(authorizer, validator)
-
+case class Router(dispatcher: Dispatcher) extends Routes:
   @cask.postJson("/command")
   def command(request: Request) =
     println(s"*** Request: $request")

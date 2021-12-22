@@ -4,10 +4,19 @@ import cask.main.Main
 
 import io.undertow.Undertow
 
+import objektwerks.service.*
+
 import scala.io.StdIn
 
 object Server extends Main:
-  val allRoutes = Seq(Router())
+  val store = Store()
+  val service = Service(store)
+  val authorizer = Authorizer(service)
+  val handler = Handler(service)
+  val validator = Validator(handler)
+  val dispatcher = Dispatcher(authorizer, validator)
+  
+  val allRoutes = Seq(Router(dispatcher))
 
   override def port: Int = 7272
   override def host: String = "localhost"
