@@ -23,7 +23,7 @@ trait Router extends MainRoutes:
   override def main(args: Array[String]): Unit = ()
 
   @postJson("/command")
-  def onCommand(request: Request) =
+  def command(request: Request) =
     println(s"*** Request: $request")
 
     val command = read[Command](request.bytes)
