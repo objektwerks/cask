@@ -3,6 +3,7 @@ package objektwerks
 import cask.endpoints.postJson
 import cask.main.Routes
 import cask.model.Request
+import com.typesafe.scalalogging.LazyLogging
 
 import objektwerks.entity.{Command, Event}
 import objektwerks.entity.Serializers.given
@@ -10,16 +11,16 @@ import objektwerks.service.*
 
 import upickle.default.*
 
-case class Router(dispatcher: Dispatcher) extends Routes:
+case class Router(dispatcher: Dispatcher) extends Routes with LazyLogging:
   @cask.postJson("/command")
   def command(request: Request) =
-    println(s"*** Request: $request")
+    logger.debug(s"*** Request: $request")
 
     val command = read[Command](request.text())
-    println(s"*** Command: $command")
+    logger.debug(s"*** Command: $command")
 
     val event = dispatcher.dispatch(command)
-    println(s"*** Event: $event")
+    logger.debug(s"*** Event: $event")
     write[Event](event)
 
   initialize()
