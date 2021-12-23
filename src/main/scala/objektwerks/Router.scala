@@ -14,8 +14,6 @@ import upickle.default.*
 case class Router(dispatcher: Dispatcher) extends Routes with LazyLogging:
   @cask.post("/command")
   def command(request: Request) =
-    logger.debug(s"*** Request: $request")
-
     val command = read[Command](request.text())
     logger.debug(s"*** Command: $command")
 
