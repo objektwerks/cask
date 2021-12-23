@@ -38,3 +38,5 @@ object Client extends LazyLogging:
 
     val loggedIn = read[LoggedIn](loginResponse.text())
     logger.info(s"*** LoggedIn: $loggedIn")
+
+    require(account == loggedIn.account, "Account not equal to LoggedIn account.")
