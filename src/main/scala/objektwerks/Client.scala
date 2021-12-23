@@ -1,20 +1,22 @@
 package objektwerks
 
+import com.typesafe.scalalogging.LazyLogging
+
 import objektwerks.entity.Serializers.given
 import objektwerks.entity.{Register, Registered}
 
 import upickle.default.*
 
-object Client:
+object Client extends LazyLogging:
   def main(args: Array[String]): Unit =
     val register = Register("live@live.com")
-    println(s"*** Register: $register")
+    logger.info(s"*** Register: $register")
 
     val registerJson = write[Register](register)
-    println(s"*** Register json: $registerJson")
+    logger.info(s"*** Register json: $registerJson")
 
     val response = requests.post("http://localhost:7272/command", data = registerJson)
-    println(s"*** Response: $response")
+    logger.info(s"*** Response: $response")
     
     val registered = read[Registered](response.text())
-    println(s"*** Registered: $registered")
+    logger.info(s"*** Registered: $registered")
