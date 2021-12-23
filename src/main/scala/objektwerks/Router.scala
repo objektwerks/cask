@@ -12,7 +12,7 @@ import objektwerks.service.*
 import upickle.default.*
 
 case class Router(dispatcher: Dispatcher) extends Routes with LazyLogging:
-  @cask.postJson("/command")
+  @cask.post("/command")
   def command(request: Request) =
     logger.debug(s"*** Request: $request")
 
