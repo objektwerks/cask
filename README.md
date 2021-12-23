@@ -37,4 +37,6 @@ Model
 
 Docs
 ----
-1. Cask - https://com-lihaoyi.github.io/cask/#todomvc-full-stack-web
+1. Cask - https://com-lihaoyi.github.io/cask/index.html
+2. uPickle - https://com-lihaoyi.github.io/upickle/
+3. Requests - https://github.com/com-lihaoyi/requests-scala
