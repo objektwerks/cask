@@ -9,6 +9,17 @@ Test
 Run
 ---
 1. sbt run
+>Multiple main classes detected. Select one to run:
+1. objektwerks.Client
+2. objektwerks.Server
+>Select 2.
+2. sbt run
+>Multiple main classes detected. Select one to run:
+1. objektwerks.Client
+2. objektwerks.Server
+>Select 1.
+3. See target/cask.log
+4. Close both terminal sessions.
 
 Model
 -----
