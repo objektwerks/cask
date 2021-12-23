@@ -8,12 +8,12 @@ Test
 
 Run
 ---
-1. sbt run
+1. sbt run ( new session )
 >Multiple main classes detected. Select one to run:
 1. objektwerks.Client
 2. objektwerks.Server
 >Select 2.
-2. sbt run
+2. sbt run ( new session )
 >Multiple main classes detected. Select one to run:
 1. objektwerks.Client
 2. objektwerks.Server
