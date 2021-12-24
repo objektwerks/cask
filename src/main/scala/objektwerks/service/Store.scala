@@ -3,8 +3,6 @@ package objektwerks.service
 import objektwerks.datetime.DateTime
 import objektwerks.entity.*
 
-import scala.collection.mutable
-
 trait Store:
   def register(email: String): Option[Account]
   def login(email: String, pin: String): Option[Account]
