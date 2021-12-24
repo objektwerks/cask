@@ -5,154 +5,59 @@ import objektwerks.entity.*
 
 import scala.collection.mutable
 
-class Store:
-  private val accounts = mutable.Map.empty[String, Account]
-  private val pools = mutable.Map.empty[Int, Pool]
-  private val surfaces = mutable.Map.empty[Int, Surface]
-  private val pumps = mutable.Map.empty[Int, Pump]
-  private val timers = mutable.Map.empty[Int, Timer]
-  private val timerSettings = mutable.Map.empty[Int, TimerSetting]
-  private val heaters = mutable.Map.empty[Int, Heater]
-  private val heaterSettings = mutable.Map.empty[Int, HeaterSetting]
-  private val measurements = mutable.Map.empty[Int, Measurement]
-  private val cleanings = mutable.Map.empty[Int, Cleaning]
-  private val chemicals = mutable.Map.empty[Int, Chemical]
-  private val supplies = mutable.Map.empty[Int, Supply]
-  private val repairs = mutable.Map.empty[Int, Repair]
+trait Store:
+  def register(email: String): Option[Account]
+  def login(email: String, pin: String): Option[Account]
 
-  def register(email: String): Option[Account] =
-    val account = Account(email = email)
-    val message = Email(id = "1", license = account.license, address = email, message = "message")
-    if Emailer.send(message) then
-      accounts.addOne(account.license, account)
-      Some(account)
-    else None
+  def isAuthorized(license: String): Boolean
 
-  def login(email: String, pin: String): Option[Account] =
-    accounts.values.find(account => account.email == email && account.pin == pin)
+  def deactivate(license: String): Option[Account]
+  def reactivate(license: String): Option[Account]
 
-  def isAuthorized(license: String): Boolean =
-    accounts
-      .get(license)
-      .filter(account => account.deactivated == 0 && account.activated > 0)
-      .fold(false)(_ => true)
+  def listPools(): Seq[Pool]
+  def addPool(pool: Pool): Pool
+  def updatePool(pool: Pool): Unit
 
-  def deactivate(license: String): Option[Account] =
-    val account = accounts.get(license)
-    if account.nonEmpty then
-      Some( account.get.copy(deactivated = DateTime.currentDate, activated = 0) )
-    else None
+  def listSurfaces(): Seq[Surface]
+  def addSurface(surface: Surface): Surface
+  def updateSurface(surface: Surface): Unit
 
-  def reactivate(license: String): Option[Account] =
-    val account = accounts.get(license)
-    if account.nonEmpty then
-      Some( account.get.copy(activated = DateTime.currentDate, deactivated = 0) )
-    else None
+  def listPumps(): Seq[Pump]
+  def addPump(pump: Pump): Pump
+  def updatePump(pump: Pump): Unit
 
-  def listPools(): Seq[Pool] = pools.values.to(Seq)
+  def listTiimers(): Seq[Timer]
+  def addTimer(timer: Timer): Timer
+  def updateTimer(timer: Timer): Unit
 
-  def addPool(pool: Pool): Pool =
-    val newPool = pool.copy(id = pools.size + 1)
-    pools.addOne(newPool.id, newPool)
-    newPool
+  def listTiimerSettings(): Seq[TimerSetting]
+  def addTimerSetting(timerSetting: TimerSetting): TimerSetting
+  def updateTimerSetting(timerSetting: TimerSetting): Unit
 
-  def updatePool(pool: Pool): Unit = pools.update(pool.id, pool)
+  def listHeaters(): Seq[Heater]
+  def addHeater(heater: Heater): Heater
+  def updateHeater(heater: Heater): Unit
 
-  def listSurfaces(): Seq[Surface] = surfaces.values.to(Seq)
+  def listHeaterSettings(): Seq[HeaterSetting]
+  def addHeaterSetting(heaterSetting: HeaterSetting): HeaterSetting
+  def updateHeaterSetting(heaterSetting: HeaterSetting): Unit
 
-  def addSurface(surface: Surface): Surface =
-    val newSurface = surface.copy(id = surfaces.size + 1)
-    surfaces.addOne(newSurface.id, newSurface)
-    newSurface
+  def listMeasurements(): Seq[Measurement]
+  def addMeasurement(measurement: Measurement): Measurement
+  def updateMeasurement(measurement: Measurement): Unit
 
-  def updateSurface(surface: Surface): Unit = surfaces.update(surface.id, surface)
+  def listCleanings(): Seq[Cleaning]
+  def addCleaning(cleaning: Cleaning): Cleaning
+  def updateCleaning(cleaning: Cleaning): Unit
 
-  def listPumps(): Seq[Pump] = pumps.values.to(Seq)
+  def listChemicals(): Seq[Chemical]
+  def addChemical(chemical: Chemical): Chemical
+  def updateChemical(chemical: Chemical): Unit
 
-  def addPump(pump: Pump): Pump =
-    val newPump = pump.copy(id = pumps.size + 1)
-    pumps.addOne(newPump.id, newPump)
-    newPump
+  def listSupplies(): Seq[Supply]
+  def addSupply(supply: Supply): Supply
+  def updateSupply(supply: Supply): Unit
 
-  def updatePump(pump: Pump): Unit = pumps.update(pump.id, pump)
-
-  def listTiimers(): Seq[Timer] = timers.values.to(Seq)
-
-  def addTimer(timer: Timer): Timer =
-    val newTimer = timer.copy(id = timers.size + 1)
-    timers.addOne(newTimer.id, newTimer)
-    newTimer
-
-  def updateTimer(timer: Timer): Unit = timers.update(timer.id, timer)
-
-  def listTiimerSettings(): Seq[TimerSetting] = timerSettings.values.to(Seq)
-
-  def addTimerSetting(timerSetting: TimerSetting): TimerSetting =
-    val newTimerSetting = timerSetting.copy(id = timerSettings.size + 1)
-    timerSettings.addOne(newTimerSetting.id, newTimerSetting)
-    newTimerSetting
-
-  def updateTimerSetting(timerSetting: TimerSetting): Unit = timerSettings.update(timerSetting.id, timerSetting)
-
-  def listHeaters(): Seq[Heater] = heaters.values.to(Seq)
-
-  def addHeater(heater: Heater): Heater =
-    val newHeater = heater.copy(id = heaters.size + 1)
-    heaters.addOne(newHeater.id, newHeater)
-    newHeater
-
-  def updateHeater(heater: Heater): Unit = heaters.update(heater.id, heater)
-
-  def listHeaterSettings(): Seq[HeaterSetting] = heaterSettings.values.to(Seq)
-
-  def addHeaterSetting(heaterSetting: HeaterSetting): HeaterSetting =
-    val newHeaterSetting = heaterSetting.copy(id = heaterSettings.size + 1)
-    heaterSettings.addOne(newHeaterSetting.id, newHeaterSetting)
-    newHeaterSetting
-
-  def updateHeaterSetting(heaterSetting: HeaterSetting): Unit = heaterSettings.update(heaterSetting.id, heaterSetting)
-
-  def listMeasurements(): Seq[Measurement] = measurements.values.to(Seq)
-
-  def addMeasurement(measurement: Measurement): Measurement =
-    val newMeasurement = measurement.copy(id = measurements.size + 1)
-    measurements.addOne(newMeasurement.id, newMeasurement)
-    newMeasurement
-
-  def updateMeasurement(measurement: Measurement): Unit = measurements.update(measurement.id, measurement)
-
-  def listCleanings(): Seq[Cleaning] = cleanings.values.to(Seq)
-
-  def addCleaning(cleaning: Cleaning): Cleaning =
-    val newCleaning = cleaning.copy(id = cleanings.size + 1)
-    cleanings.addOne(newCleaning.id, newCleaning)
-    newCleaning
-
-  def updateCleaning(cleaning: Cleaning): Unit = cleanings.update(cleaning.id, cleaning)
-
-  def listChemicals(): Seq[Chemical] = chemicals.values.to(Seq)
-
-  def addChemical(chemical: Chemical): Chemical =
-    val newChemical = chemical.copy(id = chemicals.size + 1)
-    chemicals.addOne(newChemical.id, newChemical)
-    newChemical
-
-  def updateChemical(chemical: Chemical): Unit = chemicals.update(chemical.id, chemical)
-
-  def listSupplies(): Seq[Supply] = supplies.values.to(Seq)
-
-  def addSupply(supply: Supply): Supply =
-    val newSupply = supply.copy(id = supplies.size + 1)
-    supplies.addOne(newSupply.id, newSupply)
-    newSupply
-
-  def updateSupply(supply: Supply): Unit = supplies.update(supply.id, supply)
-
-  def listRepairs(): Seq[Repair] = repairs.values.to(Seq)
-
-  def addRepair(repair: Repair): Repair =
-    val newRepair = repair.copy(id = repairs.size + 1)
-    repairs.addOne(newRepair.id, newRepair)
-    newRepair
-
-  def updateRepair(repair: Repair): Unit = repairs.update(repair.id, repair)
+  def listRepairs(): Seq[Repair]
+  def addRepair(repair: Repair): Repair
+  def updateRepair(repair: Repair): Unit
