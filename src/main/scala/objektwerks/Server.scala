@@ -10,7 +10,7 @@ import objektwerks.service.*
 import scala.io.StdIn
 
 object Server extends Main with LazyLogging:
-  val store = Store()
+  val store = MapStore()
   val service = Service(store)
   val authorizer = Authorizer(service)
   val handler = Handler(service)
