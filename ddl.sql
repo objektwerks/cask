@@ -115,19 +115,18 @@ CREATE TABLE repair (
   cost NUMERIC(7, 2) NOT NULL
 );
 
-CREATE TABLE fault (
-  date_of INT NOT NULL,
-  time_of INT NOT NULL,
-  nano_of Int NOT NULL,
-  code INT NOT NULL,
-  cause VARCHAR NOT NULL,
-  PRIMARY KEY (date_of, time_of, nano_of)
-);
-
 CREATE TABLE email (
   id VARCHAR PRIMARY KEY,
   license VARCHAR(36) NOT NULL,
   address VARCHAR NOT NULL,
   processed BOOL NOT NULL,
   valid BOOL NOT NULL
+);
+
+CREATE TABLE fault (
+  date_of INT NOT NULL,
+  time_of INT NOT NULL,
+  nano_of Int NOT NULL,
+  cause VARCHAR NOT NULL,
+  PRIMARY KEY (date_of, time_of, nano_of)
 );
