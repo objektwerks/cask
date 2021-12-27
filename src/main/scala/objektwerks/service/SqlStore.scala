@@ -5,11 +5,16 @@ import com.typesafe.config.Config
 import objektwerks.datetime.DateTime
 import objektwerks.entity.*
 
+import scalikejdbc._
+
 class SqlStore(conf: Config) extends Store:
   val driver = conf.getString("db.driver")
   val url = conf.getString("db.url")
   val user = conf.getString("db.user")
   val password = conf.getString("db.password")
+
+  Class.forName(driver)
+  ConnectionPool.singleton(url, user, password)
 
   def register(email: String): Option[Account] = ???
   def login(email: String, pin: String): Option[Account] = ???
