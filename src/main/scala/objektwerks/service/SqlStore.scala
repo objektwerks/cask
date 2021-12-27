@@ -1,9 +1,16 @@
 package objektwerks.service
 
+import com.typesafe.config.Config
+
 import objektwerks.datetime.DateTime
 import objektwerks.entity.*
 
-class SqlStore extends Store:
+class SqlStore(conf: Config) extends Store:
+  val driver = conf.getString("db.driver")
+  val url = conf.getString("db.url")
+  val user = conf.getString("db.user")
+  val password = conf.getString("db.password")
+
   def register(email: String): Option[Account] = ???
   def login(email: String, pin: String): Option[Account] = ???
 
