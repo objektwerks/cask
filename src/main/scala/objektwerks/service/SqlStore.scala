@@ -38,7 +38,12 @@ class SqlStore(conf: Config) extends Store:
     }
     pool.copy(id = id)
     
-  def updatePool(pool: Pool): Unit = ???
+  def updatePool(pool: Pool): Unit =
+    DB localTx { implicit session =>
+      sql"update pool set name = ${pool.name}, built = ${pool.built}, volume = ${pool.volume} where id = ${pool.id}"
+      .update()
+    }
+    ()
 
   def listSurfaces(): Seq[Surface] = ???
   def addSurface(surface: Surface): Surface = ???
