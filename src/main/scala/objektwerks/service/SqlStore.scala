@@ -73,7 +73,7 @@ class SqlStore(conf: Config) extends Store:
   def addPool(pool: Pool): Pool =
     val id = DB localTx { implicit session =>
       sql"insert into pool(license, name, built, volume) values(${pool.license}, ${pool.name}, ${pool.built}, ${pool.volume})"
-      .update()
+      .updateAndReturnGeneratedKey().toInt
     }
     pool.copy(id = id)
     
@@ -94,7 +94,7 @@ class SqlStore(conf: Config) extends Store:
   def addSurface(surface: Surface): Surface =
     val id = DB localTx { implicit session =>
       sql"insert into surface(pool_id, installed, kind) values(${surface.poolId}, ${surface.installed}, ${surface.kind})"
-      .update()
+      .updateAndReturnGeneratedKey().toInt
     }
     surface.copy(id = id)
 
