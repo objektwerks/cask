@@ -65,7 +65,7 @@ class SqlStore(conf: Config) extends Store:
 
   def listPools(): Seq[Pool] =
     DB readOnly { implicit session =>
-      sql"select * from pool"
+      sql"select * from pool order by built"
         .map( rs => Pool( rs.int("id"), rs.string("license"), rs.string("name"), rs.int("built"), rs.int("volume") ) )
         .list()
     }
