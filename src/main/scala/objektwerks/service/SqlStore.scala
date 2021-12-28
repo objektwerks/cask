@@ -31,7 +31,13 @@ class SqlStore(conf: Config) extends Store:
         .list()
     }
 
-  def addPool(pool: Pool): Pool = ???
+  def addPool(pool: Pool): Pool =
+    val id = DB localTx { implicit session =>
+      sql"insert into pool(license, name, built, volume) values(${pool.license}, ${pool.name}, ${pool.built}, ${pool.volume})"
+      .update()
+    }
+    pool.copy(id = id)
+    
   def updatePool(pool: Pool): Unit = ???
 
   def listSurfaces(): Seq[Surface] = ???
