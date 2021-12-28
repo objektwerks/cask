@@ -52,7 +52,16 @@ class SqlStore(conf: Config) extends Store:
       else None
     }
 
-  def reactivate(license: String): Option[Account] = ???
+  def reactivate(license: String): Option[Account] =
+    DB localTx { implicit session =>
+      val activated = sql"update account set activated = ${DateTime.currentDate}, deactivated = 0 where license = $license"
+      .update()
+      if activated > 0 then
+        sql"select * from account where license = $license"
+          .map( rs => Account( rs.string("license"), rs.string("email"), rs.string("pin"), rs.int("activated"), rs.int("deactivated") ) )
+          .single()
+      else None
+    }
 
   def listPools(): Seq[Pool] =
     DB readOnly { implicit session =>
