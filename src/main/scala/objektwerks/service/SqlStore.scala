@@ -84,7 +84,13 @@ class SqlStore(conf: Config) extends Store:
     }
     ()
 
-  def listSurfaces(): Seq[Surface] = ???
+  def listSurfaces(): Seq[Surface] =
+    DB readOnly { implicit session =>
+      sql"select * from surface order by installed"
+        .map( rs => Surface( rs.int("id"), rs.int("pool_id"), rs.int("installed"), rs.string("kind") ) )
+        .list()
+    }
+
   def addSurface(surface: Surface): Surface = ???
   def updateSurface(surface: Surface): Unit = ???
 
