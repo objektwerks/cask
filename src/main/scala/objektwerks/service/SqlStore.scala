@@ -30,7 +30,7 @@ class SqlStore(conf: Config) extends Store:
   def login(email: String, pin: String): Option[Account] =
     DB readOnly { implicit session =>
       sql"select * from account where email = $email and pin = $pin"
-        .map( rs => Account( rs.string("license"), rs.string("email"), rs.string("pin"), rs.int("activated"), rs.int("deactivated") ) )
+        .map(rs => Account(rs.string("license"), rs.string("email"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
         .single()
     }
 
@@ -47,7 +47,7 @@ class SqlStore(conf: Config) extends Store:
       .update()
       if deactivated > 0 then
         sql"select * from account where license = $license"
-          .map( rs => Account( rs.string("license"), rs.string("email"), rs.string("pin"), rs.int("activated"), rs.int("deactivated") ) )
+          .map(rs => Account(rs.string("license"), rs.string("email"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
           .single()
       else None
     }
@@ -58,7 +58,7 @@ class SqlStore(conf: Config) extends Store:
       .update()
       if activated > 0 then
         sql"select * from account where license = $license"
-          .map( rs => Account( rs.string("license"), rs.string("email"), rs.string("pin"), rs.int("activated"), rs.int("deactivated") ) )
+          .map(rs => Account(rs.string("license"), rs.string("email"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
           .single()
       else None
     }
@@ -66,7 +66,7 @@ class SqlStore(conf: Config) extends Store:
   def listPools(): Seq[Pool] =
     DB readOnly { implicit session =>
       sql"select * from pool order by built"
-        .map( rs => Pool( rs.int("id"), rs.string("license"), rs.string("name"), rs.int("built"), rs.int("volume") ) )
+        .map(rs => Pool(rs.int("id"), rs.string("license"), rs.string("name"), rs.int("built"), rs.int("volume")))
         .list()
     }
 
@@ -87,11 +87,17 @@ class SqlStore(conf: Config) extends Store:
   def listSurfaces(): Seq[Surface] =
     DB readOnly { implicit session =>
       sql"select * from surface order by installed"
-        .map( rs => Surface( rs.int("id"), rs.int("pool_id"), rs.int("installed"), rs.string("kind") ) )
+        .map(rs => Surface(rs.int("id"), rs.int("pool_id"), rs.int("installed"), rs.string("kind")))
         .list()
     }
 
-  def addSurface(surface: Surface): Surface = ???
+  def addSurface(surface: Surface): Surface =
+    val id = DB localTx { implicit session =>
+      sql"insert into surface(pool_id, installed, kind) values(${surface.poolId}, ${surface.installed}, ${surface.kind})"
+      .update()
+    }
+    surface.copy(id = id)
+
   def updateSurface(surface: Surface): Unit = ???
 
   def listPumps(): Seq[Pump] = ???
