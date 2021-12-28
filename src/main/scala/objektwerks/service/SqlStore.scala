@@ -105,7 +105,13 @@ class SqlStore(conf: Config) extends Store:
     }
     ()
 
-  def listPumps(): Seq[Pump] = ???
+  def listPumps(): Seq[Pump] =
+    DB readOnly { implicit session =>
+      sql"select * from pump order by installed"
+        .map(rs => Pump(rs.int("id"), rs.int("pool_id"), rs.int("installed"), rs.string("model")))
+        .list()
+    }
+
   def addPump(pump: Pump): Pump = ???
   def updatePump(pump: Pump): Unit = ???
 
