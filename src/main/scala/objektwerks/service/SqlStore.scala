@@ -24,7 +24,13 @@ class SqlStore(conf: Config) extends Store:
   def deactivate(license: String): Option[Account] = ???
   def reactivate(license: String): Option[Account] = ???
 
-  def listPools(): Seq[Pool] = ???
+  def listPools(): Seq[Pool] =
+    DB readOnly { implicit session =>
+      sql"select * from pool"
+        .map( rs => Pool( rs.int("id"), rs.string("license"), rs.string("name"), rs.int("built"), rs.int("volume") ) )
+        .list()
+    }
+
   def addPool(pool: Pool): Pool = ???
   def updatePool(pool: Pool): Unit = ???
 
