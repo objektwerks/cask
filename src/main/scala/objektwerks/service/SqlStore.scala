@@ -39,9 +39,19 @@ class SqlStore(conf: Config) extends Store:
       sql"select count(*) from account where license = $license and deactivated = 0 and activated > 0"
         .update()
     }
-    if (count > 0) then true else false
+    if count > 0 then true else false
 
-  def deactivate(license: String): Option[Account] = ???
+  def deactivate(license: String): Option[Account] =
+    DB localTx { implicit session =>
+      val deactivated = sql"update account set deactivated = ${DateTime.currentDate}, activated = 0 where license = $license"
+      .update()
+      if deactivated > 0 then
+        sql"select * from account where license = $license"
+          .map( rs => Account( rs.string("license"), rs.string("email"), rs.string("pin"), rs.int("activated"), rs.int("deactivated") ) )
+          .single()
+      else None
+    }
+
   def reactivate(license: String): Option[Account] = ???
 
   def listPools(): Seq[Pool] =
