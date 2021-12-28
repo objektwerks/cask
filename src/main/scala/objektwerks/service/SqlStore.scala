@@ -27,7 +27,12 @@ class SqlStore(conf: Config) extends Store:
       Some(account)
     else None
 
-  def login(email: String, pin: String): Option[Account] = ???
+  def login(email: String, pin: String): Option[Account] =
+    DB readOnly { implicit session =>
+      sql"select * from account where email = $email and pin = $pin"
+        .map( rs => Account( rs.string("license"), rs.string("email"), rs.string("pin"), rs.int("activated"), rs.int("deactivated") ) )
+        .single()
+    }
 
   def isAuthorized(license: String): Boolean = ???
 
