@@ -16,7 +16,17 @@ class SqlStore(conf: Config) extends Store:
   Class.forName(driver)
   ConnectionPool.singleton(url, user, password)
 
-  def register(email: String): Option[Account] = ???
+  def register(email: String): Option[Account] =
+    val account = Account(email = email)
+    val message = Email(id = "1", license = account.license, address = email, message = "message")
+    if Emailer.send(message) then
+      DB localTx { implicit session =>
+        sql"insert into account(license, email, pin, activated, deactivated) values(${account.license}, ${account.email}, ${account.pin}, ${account.activated}, ${account.deactivated})"
+        .update()
+      }
+      Some(account)
+    else None
+
   def login(email: String, pin: String): Option[Account] = ???
 
   def isAuthorized(license: String): Boolean = ???
