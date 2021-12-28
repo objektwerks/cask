@@ -98,7 +98,12 @@ class SqlStore(conf: Config) extends Store:
     }
     surface.copy(id = id)
 
-  def updateSurface(surface: Surface): Unit = ???
+  def updateSurface(surface: Surface): Unit =
+    DB localTx { implicit session =>
+      sql"update surface set installed = ${surface.installed}, kind = ${surface.kind} where id = ${surface.id}"
+      .update()
+    }
+    ()
 
   def listPumps(): Seq[Pump] = ???
   def addPump(pump: Pump): Pump = ???
