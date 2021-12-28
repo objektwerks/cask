@@ -34,7 +34,12 @@ class SqlStore(conf: Config) extends Store:
         .single()
     }
 
-  def isAuthorized(license: String): Boolean = ???
+  def isAuthorized(license: String): Boolean =
+    val count = DB readOnly { implicit session =>
+      sql"select count(*) from account where license = $license and deactivated = 0 and activated > 0"
+        .update()
+    }
+    if (count > 0) then true else false
 
   def deactivate(license: String): Option[Account] = ???
   def reactivate(license: String): Option[Account] = ???
