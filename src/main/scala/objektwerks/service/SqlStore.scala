@@ -161,7 +161,12 @@ class SqlStore(conf: Config) extends Store:
     }
     timerSetting.copy(id = id)
 
-  def updateTimerSetting(timerSetting: TimerSetting): Unit = ???
+  def updateTimerSetting(timerSetting: TimerSetting): Unit =
+    DB localTx { implicit session =>
+      sql"update timer_setting set created = ${timerSetting.created}, time_on = ${timerSetting.timeOn}, time_off = ${timerSetting.timeOff} where id = ${timerSetting.id}"
+      .update()
+    }
+    ()
 
   def listHeaters(): Seq[Heater] =
     DB readOnly { implicit session =>
