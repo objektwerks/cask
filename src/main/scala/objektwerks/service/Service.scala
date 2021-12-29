@@ -42,7 +42,7 @@ class Service(store: Store):
   def addPump(pump: Pump): Either[Throwable, Pump] = Try( store.addPump(pump) ).toEither
   def updatePump(pump: Pump): Either[Throwable, Unit] = Try( store.updatePump(pump) ).toEither
 
-  def listTimers(poolId: Int): Either[Throwable, Seq[Timer]] = Try( store.listTiimers() ).toEither
+  def listTimers(poolId: Int): Either[Throwable, Seq[Timer]] = Try( store.listTimers() ).toEither
   def addTimer(timer: Timer): Either[Throwable, Timer] = Try( store.addTimer(timer) ).toEither
   def updateTimer(timer: Timer): Either[Throwable, Unit] = Try( store.updateTimer(timer) ).toEither
 

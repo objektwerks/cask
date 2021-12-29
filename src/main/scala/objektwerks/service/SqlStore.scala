@@ -126,7 +126,13 @@ class SqlStore(conf: Config) extends Store:
     }
     ()
 
-  def listTiimers(): Seq[Timer] = ???
+  def listTimers(): Seq[Timer] =
+    DB readOnly { implicit session =>
+      sql"select * from timer order by installed"
+        .map(rs => Timer(rs.int("id"), rs.int("pool_id"), rs.int("installed"), rs.string("model")))
+        .list()
+    }
+
   def addTimer(timer: Timer): Timer = ???
   def updateTimer(timer: Timer): Unit = ???
 

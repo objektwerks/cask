@@ -24,7 +24,7 @@ trait Store:
   def addPump(pump: Pump): Pump
   def updatePump(pump: Pump): Unit
 
-  def listTiimers(): Seq[Timer]
+  def listTimers(): Seq[Timer]
   def addTimer(timer: Timer): Timer
   def updateTimer(timer: Timer): Unit
 

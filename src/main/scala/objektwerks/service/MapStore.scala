@@ -76,7 +76,7 @@ class MapStore extends Store:
 
   def updatePump(pump: Pump): Unit = pumps.update(pump.id, pump)
 
-  def listTiimers(): Seq[Timer] = timers.values.to(Seq)
+  def listTimers(): Seq[Timer] = timers.values.to(Seq)
 
   def addTimer(timer: Timer): Timer =
     val newTimer = timer.copy(id = timers.size + 1)
