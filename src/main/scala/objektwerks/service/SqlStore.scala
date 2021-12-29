@@ -149,12 +149,18 @@ class SqlStore(conf: Config) extends Store:
 
   def listTimerSettings(): Seq[TimerSetting] =
     DB readOnly { implicit session =>
-      sql"select * from timersetting order by created"
+      sql"select * from timer_setting order by created"
         .map(rs => TimerSetting(rs.int("id"), rs.int("timer_id"), rs.int("created"), rs.int("time_on"), rs.int("time_off")))
         .list()
     }
 
-  def addTimerSetting(timerSetting: TimerSetting): TimerSetting = ???
+  def addTimerSetting(timerSetting: TimerSetting): TimerSetting =
+    val id = DB localTx { implicit session =>
+      sql"insert into timer_setting(timer_id, created, time_on, time_off) values(${timerSetting.timerId}, ${timerSetting.created}, ${timerSetting.timeOn}, ${timerSetting.timeOff})"
+      .updateAndReturnGeneratedKey().toInt
+    }
+    timerSetting.copy(id = id)
+
   def updateTimerSetting(timerSetting: TimerSetting): Unit = ???
 
   def listHeaters(): Seq[Heater] =
