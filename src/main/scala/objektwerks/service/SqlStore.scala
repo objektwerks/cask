@@ -119,7 +119,12 @@ class SqlStore(conf: Config) extends Store:
     }
     pump.copy(id = id)  
   
-  def updatePump(pump: Pump): Unit = ???
+  def updatePump(pump: Pump): Unit =
+    DB localTx { implicit session =>
+      sql"update pump set installed = ${pump.installed}, kind = ${pump.model} where id = ${pump.id}"
+      .update()
+    }
+    ()
 
   def listTiimers(): Seq[Timer] = ???
   def addTimer(timer: Timer): Timer = ???
