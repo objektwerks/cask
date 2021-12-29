@@ -151,7 +151,13 @@ class SqlStore(conf: Config) extends Store:
   def addTimerSetting(timerSetting: TimerSetting): TimerSetting = ???
   def updateTimerSetting(timerSetting: TimerSetting): Unit = ???
 
-  def listHeaters(): Seq[Heater] = ???
+  def listHeaters(): Seq[Heater] =
+    DB readOnly { implicit session =>
+      sql"select * from heater order by installed"
+        .map(rs => Heater(rs.int("id"), rs.int("pool_id"), rs.int("installed"), rs.string("model")))
+        .list()
+    }
+
   def addHeater(heater: Heater): Heater = ???
   def updateHeater(heater: Heater): Unit = ???
 
