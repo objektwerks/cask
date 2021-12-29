@@ -28,7 +28,7 @@ trait Store:
   def addTimer(timer: Timer): Timer
   def updateTimer(timer: Timer): Unit
 
-  def listTiimerSettings(): Seq[TimerSetting]
+  def listTimerSettings(): Seq[TimerSetting]
   def addTimerSetting(timerSetting: TimerSetting): TimerSetting
   def updateTimerSetting(timerSetting: TimerSetting): Unit
 

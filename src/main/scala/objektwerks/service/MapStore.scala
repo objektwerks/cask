@@ -85,7 +85,7 @@ class MapStore extends Store:
 
   def updateTimer(timer: Timer): Unit = timers.update(timer.id, timer)
 
-  def listTiimerSettings(): Seq[TimerSetting] = timerSettings.values.to(Seq)
+  def listTimerSettings(): Seq[TimerSetting] = timerSettings.values.to(Seq)
 
   def addTimerSetting(timerSetting: TimerSetting): TimerSetting =
     val newTimerSetting = timerSetting.copy(id = timerSettings.size + 1)

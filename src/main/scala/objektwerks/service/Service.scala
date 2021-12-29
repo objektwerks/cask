@@ -46,7 +46,7 @@ class Service(store: Store):
   def addTimer(timer: Timer): Either[Throwable, Timer] = Try( store.addTimer(timer) ).toEither
   def updateTimer(timer: Timer): Either[Throwable, Unit] = Try( store.updateTimer(timer) ).toEither
 
-  def listTimerSettings(timerId: Int): Either[Throwable, Seq[TimerSetting]] = Try( store.listTiimerSettings() ).toEither
+  def listTimerSettings(timerId: Int): Either[Throwable, Seq[TimerSetting]] = Try( store.listTimerSettings() ).toEither
   def addTimerSetting(timerSetting: TimerSetting): Either[Throwable, TimerSetting] = Try( store.addTimerSetting(timerSetting) ).toEither
   def updateTimerSetting(timerSetting: TimerSetting): Either[Throwable, Unit] = Try( store.updateTimerSetting(timerSetting) ).toEither
 
