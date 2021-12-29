@@ -140,7 +140,12 @@ class SqlStore(conf: Config) extends Store:
     }
     timer.copy(id = id)
   
-  def updateTimer(timer: Timer): Unit = ???
+  def updateTimer(timer: Timer): Unit =
+    DB localTx { implicit session =>
+      sql"update timer set installed = ${timer.installed}, kind = ${timer.model} where id = ${timer.id}"
+      .update()
+    }
+    ()
 
   def listTiimerSettings(): Seq[TimerSetting] = ???
   def addTimerSetting(timerSetting: TimerSetting): TimerSetting = ???
