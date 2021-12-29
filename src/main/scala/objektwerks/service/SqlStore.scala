@@ -203,7 +203,12 @@ class SqlStore(conf: Config) extends Store:
     }
     heaterSetting.copy(id = id)
 
-  def updateHeaterSetting(heaterSetting: HeaterSetting): Unit = ???
+  def updateHeaterSetting(heaterSetting: HeaterSetting): Unit =
+    DB localTx { implicit session =>
+      sql"update heater_setting set temp = ${heaterSetting.temp}, date_on = ${heaterSetting.dateOn}, time_off = ${heaterSetting.dateOff} where id = ${heaterSetting.id}"
+      .update()
+    }
+    ()
 
   def listMeasurements(): Seq[Measurement] = ???
   def addMeasurement(measurement: Measurement): Measurement = ???
