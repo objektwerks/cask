@@ -133,7 +133,13 @@ class SqlStore(conf: Config) extends Store:
         .list()
     }
 
-  def addTimer(timer: Timer): Timer = ???
+  def addTimer(timer: Timer): Timer =
+    val id = DB localTx { implicit session =>
+      sql"insert into timer(pool_id, installed, kind) values(${timer.poolId}, ${timer.installed}, ${timer.model})"
+      .updateAndReturnGeneratedKey().toInt
+    }
+    timer.copy(id = id)
+  
   def updateTimer(timer: Timer): Unit = ???
 
   def listTiimerSettings(): Seq[TimerSetting] = ???
