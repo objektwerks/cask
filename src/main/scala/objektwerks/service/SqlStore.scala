@@ -189,7 +189,13 @@ class SqlStore(conf: Config) extends Store:
     }
     ()
 
-  def listHeaterSettings(): Seq[HeaterSetting] = ???
+  def listHeaterSettings(): Seq[HeaterSetting] =
+    DB readOnly { implicit session =>
+      sql"select * from heater_setting order by date_on"
+        .map(rs => HeaterSetting(rs.int("id"), rs.int("heater_id"), rs.int("temp"), rs.int("date_on"), rs.int("date_off")))
+        .list()
+    }
+
   def addHeaterSetting(heaterSetting: HeaterSetting): HeaterSetting = ???
   def updateHeaterSetting(heaterSetting: HeaterSetting): Unit = ???
 
