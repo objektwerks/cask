@@ -165,7 +165,12 @@ class SqlStore(conf: Config) extends Store:
     }
     heater.copy(id = id)
 
-  def updateHeater(heater: Heater): Unit = ???
+  def updateHeater(heater: Heater): Unit =
+    DB localTx { implicit session =>
+      sql"update heater set installed = ${heater.installed}, kind = ${heater.model} where id = ${heater.id}"
+      .update()
+    }
+    ()
 
   def listHeaterSettings(): Seq[HeaterSetting] = ???
   def addHeaterSetting(heaterSetting: HeaterSetting): HeaterSetting = ???
