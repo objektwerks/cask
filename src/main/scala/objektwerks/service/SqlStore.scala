@@ -158,7 +158,13 @@ class SqlStore(conf: Config) extends Store:
         .list()
     }
 
-  def addHeater(heater: Heater): Heater = ???
+  def addHeater(heater: Heater): Heater =
+    val id = DB localTx { implicit session =>
+      sql"insert into heater(pool_id, installed, kind) values(${heater.poolId}, ${heater.installed}, ${heater.model})"
+      .updateAndReturnGeneratedKey().toInt
+    }
+    heater.copy(id = id)
+
   def updateHeater(heater: Heater): Unit = ???
 
   def listHeaterSettings(): Seq[HeaterSetting] = ???
