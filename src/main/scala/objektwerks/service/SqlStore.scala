@@ -112,7 +112,13 @@ class SqlStore(conf: Config) extends Store:
         .list()
     }
 
-  def addPump(pump: Pump): Pump = ???
+  def addPump(pump: Pump): Pump =
+    val id = DB localTx { implicit session =>
+      sql"insert into pump(pool_id, installed, kind) values(${pump.poolId}, ${pump.installed}, ${pump.model})"
+      .updateAndReturnGeneratedKey().toInt
+    }
+    pump.copy(id = id)  
+  
   def updatePump(pump: Pump): Unit = ???
 
   def listTiimers(): Seq[Timer] = ???
