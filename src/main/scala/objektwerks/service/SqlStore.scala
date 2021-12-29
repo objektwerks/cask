@@ -147,7 +147,13 @@ class SqlStore(conf: Config) extends Store:
     }
     ()
 
-  def listTiimerSettings(): Seq[TimerSetting] = ???
+  def listTiimerSettings(): Seq[TimerSetting] =
+    DB readOnly { implicit session =>
+      sql"select * from timersetting order by created"
+        .map(rs => TimerSetting(rs.int("id"), rs.int("timer_id"), rs.int("created"), rs.int("time_on"), rs.int("time_off")))
+        .list()
+    }
+
   def addTimerSetting(timerSetting: TimerSetting): TimerSetting = ???
   def updateTimerSetting(timerSetting: TimerSetting): Unit = ???
 
