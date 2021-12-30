@@ -225,10 +225,14 @@ class SqlStore(conf: Config) extends Store:
   def addMeasurement(measurement: Measurement): Measurement =
     val id = DB localTx { implicit session =>
       sql"""
-        insert into measurement(pool_id, installed, kind) values(${measurement.poolId}, ${measurement.measured}, ${measurement.temp},
-        ${measurement.totalHardness}, ${measurement.totalChlorine}, ${measurement.totalBromine}, ${measurement.freeChlorine},
-        ${measurement.ph}, ${measurement.totalAlkalinity}, ${measurement.cyanuricAcid})
-        """.stripMargin.updateAndReturnGeneratedKey().toInt
+        insert into measurement(pool_id, measured, temp, total_hardness, total_chlorine, total_bromine, free_chlorine, ph, total_alkalinity, 
+        cyanuric_acid) values(${measurement.poolId}, ${measurement.measured}, ${measurement.temp}, ${measurement.totalHardness},
+        ${measurement.totalChlorine}, ${measurement.totalBromine}, ${measurement.freeChlorine}, ${measurement.ph}, ${measurement.totalAlkalinity},
+        ${measurement.cyanuricAcid})
+        """
+        .stripMargin
+        .updateAndReturnGeneratedKey()
+        .toInt
     }
     measurement.copy(id = id)
 
@@ -238,7 +242,9 @@ class SqlStore(conf: Config) extends Store:
         update measurement set measured = ${measurement.measured}, temp = ${measurement.temp}, total_hardness = ${measurement.totalHardness},
         total_chlorine = ${measurement.totalChlorine}, total_bromine = ${measurement.totalBromine}, free_chlorine = ${measurement.freeChlorine},
         ph = ${measurement.ph}, total_alkalinity = ${measurement.totalAlkalinity}, cyanuric_acid = ${measurement.cyanuricAcid} where id = ${measurement.id}
-        """.stripMargin.update()
+        """
+        .stripMargin
+        .update()
     }
     ()
 
@@ -268,7 +274,19 @@ CREATE TABLE cleaning (
         .list()
     }
 
-  def addCleaning(cleaning: Cleaning): Cleaning = ???
+  def addCleaning(cleaning: Cleaning): Cleaning =
+    val id = DB localTx { implicit session =>
+      sql"""
+        insert into cleaning(pool_id, cleaned, brush, net, vacuum, skimmer_basket, pump_basket, pump_filter, deck) values(${cleaning.poolId},
+        ${cleaning.cleaned}, ${cleaning.brush}, ${cleaning.net}, ${cleaning.vacuum}, ${cleaning.skimmerBasket}, ${cleaning.pumpBasket},
+        ${cleaning.pumpFilter}, ${cleaning.deck})
+        """
+        .stripMargin
+        .updateAndReturnGeneratedKey()
+        .toInt
+    }
+    cleaning.copy(id = id)
+
   def updateCleaning(cleaning: Cleaning): Unit = ???
 
   def listChemicals(): Seq[Chemical] = ???
