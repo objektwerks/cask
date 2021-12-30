@@ -121,7 +121,9 @@ class DispatcherTest extends AnyFunSuite with Matchers:
         account.isDeactivated shouldBe true
         account
       case fault: Fault => fail(fault.cause)
-      case _ => fail()
+      case event: Event =>
+        println(event)
+        fail()
 
   def testReactivate(dispatcher: Dispatcher, account: Account): Account =
     val command = Reactivate(account.license)
@@ -130,7 +132,9 @@ class DispatcherTest extends AnyFunSuite with Matchers:
         account.isActivated shouldBe true
         account
       case fault: Fault => fail(fault.cause)
-      case _ => fail()
+      case event: Event =>
+        println(event)
+        fail()
 
   def testAddPool(dispatcher: Dispatcher, pool: Pool): Pool =
     val add = AddPool(pool.license, pool)

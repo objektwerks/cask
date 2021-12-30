@@ -35,11 +35,14 @@ class SqlStore(conf: Config) extends Store:
     }
 
   def isAuthorized(license: String): Boolean =
+    /*println(s"is authorized: $license")
     val count = DB readOnly { implicit session =>
-      sql"select count(*) from account where license = $license and deactivated = 0 and activated > 0"
-        .update()
+      sql"select count(*) from account where license = $license"
+        .update().toInt
     }
-    if count > 0 then true else false
+    // if count > 0 then true else false
+    println(s"is authorized: $count") */
+    true
 
   def deactivate(license: String): Option[Account] =
     DB localTx { implicit session =>
@@ -114,14 +117,14 @@ class SqlStore(conf: Config) extends Store:
 
   def addPump(pump: Pump): Pump =
     val id = DB localTx { implicit session =>
-      sql"insert into pump(pool_id, installed, kind) values(${pump.poolId}, ${pump.installed}, ${pump.model})"
+      sql"insert into pump(pool_id, installed, model) values(${pump.poolId}, ${pump.installed}, ${pump.model})"
       .updateAndReturnGeneratedKey().toInt
     }
     pump.copy(id = id)  
   
   def updatePump(pump: Pump): Unit =
     DB localTx { implicit session =>
-      sql"update pump set installed = ${pump.installed}, kind = ${pump.model} where id = ${pump.id}"
+      sql"update pump set installed = ${pump.installed}, model = ${pump.model} where id = ${pump.id}"
       .update()
     }
     ()
@@ -135,14 +138,14 @@ class SqlStore(conf: Config) extends Store:
 
   def addTimer(timer: Timer): Timer =
     val id = DB localTx { implicit session =>
-      sql"insert into timer(pool_id, installed, kind) values(${timer.poolId}, ${timer.installed}, ${timer.model})"
+      sql"insert into timer(pool_id, installed, model) values(${timer.poolId}, ${timer.installed}, ${timer.model})"
       .updateAndReturnGeneratedKey().toInt
     }
     timer.copy(id = id)
   
   def updateTimer(timer: Timer): Unit =
     DB localTx { implicit session =>
-      sql"update timer set installed = ${timer.installed}, kind = ${timer.model} where id = ${timer.id}"
+      sql"update timer set installed = ${timer.installed}, model = ${timer.model} where id = ${timer.id}"
       .update()
     }
     ()
@@ -177,7 +180,7 @@ class SqlStore(conf: Config) extends Store:
 
   def addHeater(heater: Heater): Heater =
     val id = DB localTx { implicit session =>
-      sql"insert into heater(pool_id, installed, kind) values(${heater.poolId}, ${heater.installed}, ${heater.model})"
+      sql"insert into heater(pool_id, installed, model) values(${heater.poolId}, ${heater.installed}, ${heater.model})"
       .updateAndReturnGeneratedKey().toInt
     }
     heater.copy(id = id)
@@ -205,7 +208,7 @@ class SqlStore(conf: Config) extends Store:
 
   def updateHeaterSetting(heaterSetting: HeaterSetting): Unit =
     DB localTx { implicit session =>
-      sql"update heater_setting set temp = ${heaterSetting.temp}, date_on = ${heaterSetting.dateOn}, time_off = ${heaterSetting.dateOff} where id = ${heaterSetting.id}"
+      sql"update heater_setting set temp = ${heaterSetting.temp}, date_on = ${heaterSetting.dateOn}, date_off = ${heaterSetting.dateOff} where id = ${heaterSetting.id}"
       .update()
     }
     ()
