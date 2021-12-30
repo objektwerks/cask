@@ -320,7 +320,12 @@ class SqlStore(conf: Config) extends Store:
     }
     supply.copy(id = id)
 
-  def updateSupply(supply: Supply): Unit = ???
+  def updateSupply(supply: Supply): Unit =
+    DB localTx { implicit session =>
+      sql"update supply set purchased = ${supply.purchased}, item = ${supply.item}, amount = ${supply.amount}, unit = ${supply.unit}, cost = ${supply.cost} where id = ${supply.id}"
+      .update()
+    }
+    ()
 
   def listRepairs(): Seq[Repair] = ???
   def addRepair(repair: Repair): Repair = ???
