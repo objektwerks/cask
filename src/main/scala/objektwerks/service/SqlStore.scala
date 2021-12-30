@@ -313,7 +313,13 @@ class SqlStore(conf: Config) extends Store:
         .list()
     }
 
-  def addSupply(supply: Supply): Supply = ???
+  def addSupply(supply: Supply): Supply =
+    val id = DB localTx { implicit session =>
+      sql"insert into supply(pool_id, purchased, item, amount, unit, cost) values(${supply.poolId}, ${supply.purchased}, ${supply.item}, ${supply.amount}, ${supply.unit}, ${supply.cost})"
+      .updateAndReturnGeneratedKey().toInt
+    }
+    supply.copy(id = id)
+
   def updateSupply(supply: Supply): Unit = ???
 
   def listRepairs(): Seq[Repair] = ???
