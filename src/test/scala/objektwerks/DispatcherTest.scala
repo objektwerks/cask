@@ -1,6 +1,7 @@
 package objektwerks
 
 import com.typesafe.config.ConfigFactory
+import com.typesafe.scalalogging.LazyLogging
 
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
@@ -10,7 +11,7 @@ import objektwerks.entity.UoM.*
 import objektwerks.entity.Validators.*
 import objektwerks.service.*
 
-class DispatcherTest extends AnyFunSuite with Matchers:
+class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
   test("dispatcher using map store") {
     val store = MapStore()
     val service = Service(store)
@@ -104,15 +105,13 @@ class DispatcherTest extends AnyFunSuite with Matchers:
       case Registered(account) =>
         account.isActivated shouldBe true
         account
-      case fault: Fault => fail(fault.cause)
-      case _ => fail()
+      case event: Event => logger.error(event.toString); fail()
 
   def testLogin(dispatcher: Dispatcher, account: Account): Unit =
     val command = Login(account.email, account.pin)
     dispatcher.dispatch(command) match
       case loggedIn: LoggedIn => account shouldBe loggedIn.account
-      case fault: Fault => fail(fault.cause)
-      case _ => fail()
+      case event: Event => logger.error(event.toString); fail()
 
   def testDeactivate(dispatcher: Dispatcher, account: Account): Account =
     val command = Deactivate(account.license)
@@ -120,8 +119,7 @@ class DispatcherTest extends AnyFunSuite with Matchers:
       case Deactivated(account) =>
         account.isDeactivated shouldBe true
         account
-      case fault: Fault => fail(fault.cause)
-      case _ => fail()
+      case event: Event => logger.error(event.toString); fail()
 
   def testReactivate(dispatcher: Dispatcher, account: Account): Account =
     val command = Reactivate(account.license)
@@ -129,8 +127,7 @@ class DispatcherTest extends AnyFunSuite with Matchers:
       case Reactivated(account) =>
         account.isActivated shouldBe true
         account
-      case fault: Fault => fail(fault.cause)
-      case _ => fail()
+      case event: Event => logger.error(event.toString); fail()
 
   def testAddPool(dispatcher: Dispatcher, pool: Pool): Pool =
     val add = AddPool(pool.license, pool)
@@ -138,15 +135,13 @@ class DispatcherTest extends AnyFunSuite with Matchers:
       case Added(pool: Pool) =>
         pool.id > 0 shouldBe true
         pool
-      case fault: Fault => fail(fault.cause)
-      case _ => fail()
+      case event: Event => logger.error(event.toString); fail()
 
   def testListPools(dispatcher: Dispatcher, account: Account): Unit =
     val list = ListPools(account.license)
     dispatcher.dispatch(list) match
       case Listed(pools) => pools.size shouldBe 1
-      case fault: Fault => fail(fault.cause)
-      case _ => fail()
+      case event: Event => logger.error(event.toString); fail()
 
   def testUpdatePool(dispatcher: Dispatcher, pool: Pool): Unit =
     val update = UpdatePool(pool.license, pool)
@@ -158,15 +153,13 @@ class DispatcherTest extends AnyFunSuite with Matchers:
       case Added(surface: Surface) =>
         surface.id > 0 shouldBe true
         surface
-      case fault: Fault => fail(fault.cause)
-      case _ => fail()
+      case event: Event => logger.error(event.toString); fail()
 
   def testListSurfaces(dispatcher: Dispatcher, pool: Pool): Unit =
     val list = ListSurfaces(pool.license, pool.id)
     dispatcher.dispatch(list) match
       case Listed(surfaces) => surfaces.size shouldBe 1
-      case fault: Fault => fail(fault.cause)
-      case _ => fail()
+      case event: Event => logger.error(event.toString); fail()
 
   def testUpdateSurface(dispatcher: Dispatcher, pool: Pool, surface: Surface): Unit =
     val update = UpdateSurface(pool.license, surface)
@@ -178,15 +171,13 @@ class DispatcherTest extends AnyFunSuite with Matchers:
       case Added(pump: Pump) =>
         pump.id > 0 shouldBe true
         pump
-      case fault: Fault => fail(fault.cause)
-      case _ => fail()
+      case event: Event => logger.error(event.toString); fail()
 
   def testListPumps(dispatcher: Dispatcher, pool: Pool): Unit =
     val list = ListPumps(pool.license, pool.id)
     dispatcher.dispatch(list) match
       case Listed(pumps) => pumps.size shouldBe 1
-      case fault: Fault => fail(fault.cause)
-      case _ => fail()
+      case event: Event => logger.error(event.toString); fail()
 
   def testUpdatePump(dispatcher: Dispatcher, pool: Pool, pump: Pump): Unit =
     val update = UpdatePump(pool.license, pump)
@@ -198,15 +189,13 @@ class DispatcherTest extends AnyFunSuite with Matchers:
       case Added(timer: Timer) =>
         timer.id > 0 shouldBe true
         timer
-      case fault: Fault => fail(fault.cause)
-      case _ => fail()
+      case event: Event => logger.error(event.toString); fail()
 
   def testListTimers(dispatcher: Dispatcher, pool: Pool): Unit =
     val list = ListTimers(pool.license, pool.id)
     dispatcher.dispatch(list) match
       case Listed(timers) => timers.size shouldBe 1
-      case fault: Fault => fail(fault.cause)
-      case _ => fail()
+      case event: Event => logger.error(event.toString); fail()
 
   def testUpdateTimer(dispatcher: Dispatcher, pool: Pool, timer: Timer): Unit =
     val update = UpdateTimer(pool.license, timer)
@@ -218,15 +207,13 @@ class DispatcherTest extends AnyFunSuite with Matchers:
       case Added(timerSetting: TimerSetting) =>
         timerSetting.id > 0 shouldBe true
         timerSetting
-      case fault: Fault => fail(fault.cause)
-      case _ => fail()
+      case event: Event => logger.error(event.toString); fail()
 
   def testListTimerSettings(dispatcher: Dispatcher, pool: Pool, timer: Timer): Unit =
     val list = ListTimerSettings(pool.license, timer.id)
     dispatcher.dispatch(list) match
       case Listed(timerSettings) => timerSettings.size shouldBe 1
-      case fault: Fault => fail(fault.cause)
-      case _ => fail()
+      case event: Event => logger.error(event.toString); fail()
 
   def testUpdateTimerSetting(dispatcher: Dispatcher, pool: Pool, timerSetting: TimerSetting): Unit =
     val update = UpdateTimerSetting(pool.license, timerSetting)
@@ -238,15 +225,13 @@ class DispatcherTest extends AnyFunSuite with Matchers:
       case Added(heater: Heater) =>
         heater.id > 0 shouldBe true
         heater
-      case fault: Fault => fail(fault.cause)
-      case _ => fail()
+      case event: Event => logger.error(event.toString); fail()
 
   def testListHeaters(dispatcher: Dispatcher, pool: Pool): Unit =
     val list = ListHeaters(pool.license, pool.id)
     dispatcher.dispatch(list) match
       case Listed(heaters) => heaters.size shouldBe 1
-      case fault: Fault => fail(fault.cause)
-      case _ => fail()
+      case event: Event => logger.error(event.toString); fail()
 
   def testUpdateHeater(dispatcher: Dispatcher, pool: Pool, heater: Heater): Unit =
     val update = UpdateHeater(pool.license, heater)
@@ -258,15 +243,13 @@ class DispatcherTest extends AnyFunSuite with Matchers:
       case Added(heaterSetting: HeaterSetting) =>
         heaterSetting.id > 0 shouldBe true
         heaterSetting
-      case fault: Fault => fail(fault.cause)
-      case _ => fail()
+      case event: Event => logger.error(event.toString); fail()
 
   def testListHeaterSettings(dispatcher: Dispatcher, pool: Pool, heater: Heater): Unit =
     val list = ListHeaterSettings(pool.license, heater.id)
     dispatcher.dispatch(list) match
       case Listed(heaterSettings) => heaterSettings.size shouldBe 1
-      case fault: Fault => fail(fault.cause)
-      case _ => fail()
+      case event: Event => logger.error(event.toString); fail()
 
   def testUpdateHeaterSetting(dispatcher: Dispatcher, pool: Pool, heaterSetting: HeaterSetting): Unit =
     val update = UpdateHeaterSetting(pool.license, heaterSetting)
@@ -278,15 +261,13 @@ class DispatcherTest extends AnyFunSuite with Matchers:
       case Added(measurement: Measurement) =>
         measurement.id > 0 shouldBe true
         measurement
-      case fault: Fault => fail(fault.cause)
-      case _ => fail()
+      case event: Event => logger.error(event.toString); fail()
 
   def testListMeasurements(dispatcher: Dispatcher, pool: Pool): Unit =
     val list = ListMeasurements(pool.license, pool.id)
     dispatcher.dispatch(list) match
       case Listed(measurements) => measurements.size shouldBe 1
-      case fault: Fault => fail(fault.cause)
-      case _ => fail()
+      case event: Event => logger.error(event.toString); fail()
 
   def testUpdateMeasurement(dispatcher: Dispatcher, pool: Pool, measurement: Measurement): Unit =
     val update = UpdateMeasurement(pool.license, measurement)
@@ -298,15 +279,13 @@ class DispatcherTest extends AnyFunSuite with Matchers:
       case Added(cleaning: Cleaning) =>
         cleaning.id > 0 shouldBe true
         cleaning
-      case fault: Fault => fail(fault.cause)
-      case _ => fail()
+      case event: Event => logger.error(event.toString); fail()
 
   def testListCleanings(dispatcher: Dispatcher, pool: Pool): Unit =
     val list = ListCleanings(pool.license, pool.id)
     dispatcher.dispatch(list) match
       case Listed(cleanings) => cleanings.size shouldBe 1
-      case fault: Fault => fail(fault.cause)
-      case _ => fail()
+      case event: Event => logger.error(event.toString); fail()
 
   def testUpdateCleaning(dispatcher: Dispatcher, pool: Pool, cleaning: Cleaning): Unit =
     val update = UpdateCleaning(pool.license, cleaning)
@@ -318,15 +297,13 @@ class DispatcherTest extends AnyFunSuite with Matchers:
       case Added(chemical: Chemical) =>
         chemical.id > 0 shouldBe true
         chemical
-      case fault: Fault => fail(fault.cause)
-      case _ => fail()
+      case event: Event => logger.error(event.toString); fail()
 
   def testListChemicals(dispatcher: Dispatcher, pool: Pool): Unit =
     val list = ListChemicals(pool.license, pool.id)
     dispatcher.dispatch(list) match
       case Listed(chemicals) => chemicals.size shouldBe 1
-      case fault: Fault => fail(fault.cause)
-      case _ => fail()
+      case event: Event => logger.error(event.toString); fail()
 
   def testUpdateChemical(dispatcher: Dispatcher, pool: Pool, chemical: Chemical): Unit =
     val update = UpdateChemical(pool.license, chemical)
@@ -338,15 +315,13 @@ class DispatcherTest extends AnyFunSuite with Matchers:
       case Added(supply: Supply) =>
         supply.id > 0 shouldBe true
         supply
-      case fault: Fault => fail(fault.cause)
-      case _ => fail()
+      case event: Event => logger.error(event.toString); fail()
 
   def testListSupplies(dispatcher: Dispatcher, pool: Pool): Unit =
     val list = ListSupplies(pool.license, pool.id)
     dispatcher.dispatch(list) match
       case Listed(supplies) => supplies.size shouldBe 1
-      case fault: Fault => fail(fault.cause)
-      case _ => fail()
+      case event: Event => logger.error(event.toString); fail()
 
   def testUpdateSupply(dispatcher: Dispatcher, pool: Pool, supply: Supply): Unit =
     val update = UpdateSupply(pool.license, supply)
@@ -358,15 +333,13 @@ class DispatcherTest extends AnyFunSuite with Matchers:
       case Added(repair: Repair) =>
         repair.id > 0 shouldBe true
         repair
-      case fault: Fault => fail(fault.cause)
-      case _ => fail()
+      case event: Event => logger.error(event.toString); fail()
 
   def testListRepairs(dispatcher: Dispatcher, pool: Pool): Unit =
     val list = ListRepairs(pool.license, pool.id)
     dispatcher.dispatch(list) match
       case Listed(repairs) => repairs.size shouldBe 1
-      case fault: Fault => fail(fault.cause)
-      case _ => fail()
+      case event: Event => logger.error(event.toString); fail()
 
   def testUpdateRepair(dispatcher: Dispatcher, pool: Pool, repair: Repair): Unit =
     val update = UpdateRepair(pool.license, repair)
