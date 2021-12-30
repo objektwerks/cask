@@ -341,4 +341,9 @@ class SqlStore(conf: Config) extends Store:
     }
     repair.copy(id = id)
 
-  def updateRepair(repair: Repair): Unit = ???
+  def updateRepair(repair: Repair): Unit =
+    DB localTx { implicit session =>
+      sql"update repair set repaired = ${repair.repaired}, repair = ${repair.repair}, cost = ${repair.cost} where id = ${repair.id}"
+      .update()
+    }
+    ()
