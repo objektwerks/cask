@@ -1,6 +1,7 @@
 package objektwerks
 
 import cask.main.Main
+import com.typesafe.config.ConfigFactory
 import com.typesafe.scalalogging.LazyLogging
 
 import io.undertow.Undertow
@@ -10,7 +11,7 @@ import objektwerks.service.*
 import scala.io.StdIn
 
 object Server extends Main with LazyLogging:
-  val store = MapStore()
+  val store = SqlStore(ConfigFactory.load("store.conf"))
   val service = Service(store)
   val authorizer = Authorizer(service)
   val handler = Handler(service)
