@@ -239,10 +239,14 @@ CREATE TABLE measurement (
 
   def addMeasurement(measurement: Measurement): Measurement =
     val id = DB localTx { implicit session =>
-      sql"insert into heater(pool_id, installed, kind) values(${heater.poolId}, ${heater.installed}, ${heater.model})"
+      sql"""
+        insert into measurement(pool_id, installed, kind) values(${measurement.poolId}, ${measurement.measured}, ${measurement.temp},
+        ${measurement.totalHardness}, ${measurement.totalChlorine}, ${measurement.totalBromine}, ${measurement.freeChlorine},
+        ${measurement.ph}, ${measurement.totalAlkalinity}, ${measurement.cyanuricAcid})
+        """.stripMargin
       .updateAndReturnGeneratedKey().toInt
     }
-    heater.copy(id = id)
+    measurement.copy(id = id)
 
   def updateMeasurement(measurement: Measurement): Unit =
     DB localTx { implicit session =>
