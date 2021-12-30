@@ -247,21 +247,7 @@ class SqlStore(conf: Config) extends Store:
         .update()
     }
     ()
-
-/*
-CREATE TABLE cleaning (
-  id SERIAL PRIMARY KEY,
-  pool_id INT REFERENCES pool(id),
-  cleaned INT NOT NULL,
-  brush BOOL NOT NULL,
-  net BOOL NOT NULL,
-  vacuum BOOL NOT NULL,
-  skimmer_basket BOOL NOT NULL,
-  pump_basket BOOL NOT NULL,
-  pump_filter BOOL NOT NULL,
-  deck BOOL NOT NULL
-);
- */    
+  
   def listCleanings(): Seq[Cleaning] =
     DB readOnly { implicit session =>
       sql"select * from cleaning order by cleaned"
@@ -287,7 +273,17 @@ CREATE TABLE cleaning (
     }
     cleaning.copy(id = id)
 
-  def updateCleaning(cleaning: Cleaning): Unit = ???
+  def updateCleaning(cleaning: Cleaning): Unit =
+    DB localTx { implicit session =>
+      sql"""
+        update cleaning set cleaned = ${cleaning.cleaned}, brush = ${cleaning.brush}, net = ${cleaning.net}, vacuum = ${cleaning.vacuum},
+        skimmer_basket = ${cleaning.skimmerBasket}, pump_basket = ${cleaning.pumpBasket}, pump_filter = ${cleaning.pumpFilter},
+        deck = ${cleaning.deck} where id = ${cleaning.id}
+        """
+        .stripMargin
+        .update()
+    }
+    ()
 
   def listChemicals(): Seq[Chemical] = ???
   def addChemical(chemical: Chemical): Chemical = ???
