@@ -299,7 +299,12 @@ class SqlStore(conf: Config) extends Store:
     }
     chemical.copy(id = id)
 
-  def updateChemical(chemical: Chemical): Unit = ???
+  def updateChemical(chemical: Chemical): Unit =
+    DB localTx { implicit session =>
+      sql"update chemical set added = ${chemical.added}, chemical = ${chemical.chemical}, amount = ${chemical.amount}, unit = ${chemical.unit} where id = ${chemical.id}"
+      .update()
+    }
+    ()
 
   def listSupplies(): Seq[Supply] = ???
   def addSupply(supply: Supply): Supply = ???
