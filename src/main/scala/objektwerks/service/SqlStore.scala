@@ -65,7 +65,7 @@ class SqlStore(conf: Config) extends Store:
 
   def listPools(): Seq[Pool] =
     DB readOnly { implicit session =>
-      sql"select * from pool order by built"
+      sql"select * from pool order by built desc"
         .map(rs => Pool(rs.int("id"), rs.string("license"), rs.string("name"), rs.int("built"), rs.int("volume")))
         .list()
     }
@@ -86,7 +86,7 @@ class SqlStore(conf: Config) extends Store:
 
   def listSurfaces(): Seq[Surface] =
     DB readOnly { implicit session =>
-      sql"select * from surface order by installed"
+      sql"select * from surface order by installed desc"
         .map(rs => Surface(rs.int("id"), rs.int("pool_id"), rs.int("installed"), rs.string("kind")))
         .list()
     }
@@ -107,7 +107,7 @@ class SqlStore(conf: Config) extends Store:
 
   def listPumps(): Seq[Pump] =
     DB readOnly { implicit session =>
-      sql"select * from pump order by installed"
+      sql"select * from pump order by installed desc"
         .map(rs => Pump(rs.int("id"), rs.int("pool_id"), rs.int("installed"), rs.string("model")))
         .list()
     }
@@ -128,7 +128,7 @@ class SqlStore(conf: Config) extends Store:
 
   def listTimers(): Seq[Timer] =
     DB readOnly { implicit session =>
-      sql"select * from timer order by installed"
+      sql"select * from timer order by installed desc"
         .map(rs => Timer(rs.int("id"), rs.int("pool_id"), rs.int("installed"), rs.string("model")))
         .list()
     }
@@ -149,7 +149,7 @@ class SqlStore(conf: Config) extends Store:
 
   def listTimerSettings(): Seq[TimerSetting] =
     DB readOnly { implicit session =>
-      sql"select * from timer_setting order by created"
+      sql"select * from timer_setting order by created desc"
         .map(rs => TimerSetting(rs.int("id"), rs.int("timer_id"), rs.int("created"), rs.int("time_on"), rs.int("time_off")))
         .list()
     }
@@ -170,7 +170,7 @@ class SqlStore(conf: Config) extends Store:
 
   def listHeaters(): Seq[Heater] =
     DB readOnly { implicit session =>
-      sql"select * from heater order by installed"
+      sql"select * from heater order by installed desc"
         .map(rs => Heater(rs.int("id"), rs.int("pool_id"), rs.int("installed"), rs.string("model")))
         .list()
     }
@@ -191,7 +191,7 @@ class SqlStore(conf: Config) extends Store:
 
   def listHeaterSettings(): Seq[HeaterSetting] =
     DB readOnly { implicit session =>
-      sql"select * from heater_setting order by date_on"
+      sql"select * from heater_setting order by date_on desc"
         .map(rs => HeaterSetting(rs.int("id"), rs.int("heater_id"), rs.int("temp"), rs.int("date_on"), rs.int("date_off")))
         .list()
     }
@@ -212,7 +212,7 @@ class SqlStore(conf: Config) extends Store:
 
   def listMeasurements(): Seq[Measurement] =
     DB readOnly { implicit session =>
-      sql"select * from measurement order by measured"
+      sql"select * from measurement order by measured desc"
         .map(rs =>
           Measurement(
             rs.int("id"), rs.int("pool_id"), rs.int("measured"), rs.int("temp"), rs.int("total_hardness"), rs.int("total_chlorine"),
@@ -250,7 +250,7 @@ class SqlStore(conf: Config) extends Store:
   
   def listCleanings(): Seq[Cleaning] =
     DB readOnly { implicit session =>
-      sql"select * from cleaning order by cleaned"
+      sql"select * from cleaning order by cleaned desc"
         .map(rs =>
           Cleaning(
             rs.int("id"), rs.int("pool_id"), rs.int("cleaned"), rs.boolean("brush"), rs.boolean("net"), rs.boolean("vacuum"),
@@ -287,7 +287,7 @@ class SqlStore(conf: Config) extends Store:
 
   def listChemicals(): Seq[Chemical] =
     DB readOnly { implicit session =>
-      sql"select * from chemical order by added"
+      sql"select * from chemical order by added desc"
         .map(rs => Chemical(rs.int("id"), rs.int("pool_id"), rs.int("added"), rs.string("chemical"), rs.double("amount"), rs.string("unit")))
         .list()
     }
@@ -308,7 +308,7 @@ class SqlStore(conf: Config) extends Store:
 
   def listSupplies(): Seq[Supply] =
     DB readOnly { implicit session =>
-      sql"select * from supply order by purchased"
+      sql"select * from supply order by purchased desc"
         .map(rs => Supply(rs.int("id"), rs.int("pool_id"), rs.int("purchased"), rs.string("item"), rs.double("amount"), rs.string("unit"), rs.double("cost")))
         .list()
     }
@@ -329,7 +329,7 @@ class SqlStore(conf: Config) extends Store:
 
   def listRepairs(): Seq[Repair] =
     DB readOnly { implicit session =>
-      sql"select * from repair order by repaired"
+      sql"select * from repair order by repaired desc"
         .map(rs => Repair(rs.int("id"), rs.int("pool_id"), rs.int("repaired"), rs.string("repair"), rs.double("cost")))
         .list()
     }
