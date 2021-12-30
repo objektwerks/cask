@@ -184,7 +184,7 @@ class SqlStore(conf: Config) extends Store:
 
   def updateHeater(heater: Heater): Unit =
     DB localTx { implicit session =>
-      sql"update heater set installed = ${heater.installed}, kind = ${heater.model} where id = ${heater.id}"
+      sql"update heater set installed = ${heater.installed}, model = ${heater.model} where id = ${heater.id}"
       .update()
     }
     ()
@@ -210,21 +210,6 @@ class SqlStore(conf: Config) extends Store:
     }
     ()
 
-/*
-CREATE TABLE measurement (
-  id SERIAL PRIMARY KEY,
-  pool_id INT REFERENCES pool(id),
-  measured INT NOT NULL,
-  temp INT NOT NULL,
-  total_hardness INT NOT NULL,
-  total_chlorine INT NOT NULL,
-  total_bromine INT NOT NULL,
-  free_chlorine INT NOT NULL,
-  ph NUMERIC(2, 1) NOT NULL,
-  total_alkalinity INT NOT NULL,
-  cyanuric_acid INT NOT NULL
-);
- */
   def listMeasurements(): Seq[Measurement] =
     DB readOnly { implicit session =>
       sql"select * from measurement order by measured"
@@ -243,15 +228,17 @@ CREATE TABLE measurement (
         insert into measurement(pool_id, installed, kind) values(${measurement.poolId}, ${measurement.measured}, ${measurement.temp},
         ${measurement.totalHardness}, ${measurement.totalChlorine}, ${measurement.totalBromine}, ${measurement.freeChlorine},
         ${measurement.ph}, ${measurement.totalAlkalinity}, ${measurement.cyanuricAcid})
-        """.stripMargin
-      .updateAndReturnGeneratedKey().toInt
+        """.stripMargin.updateAndReturnGeneratedKey().toInt
     }
     measurement.copy(id = id)
 
   def updateMeasurement(measurement: Measurement): Unit =
     DB localTx { implicit session =>
-      sql"update heater set installed = ${heater.installed}, kind = ${heater.model} where id = ${heater.id}"
-      .update()
+      sql"""
+        update measurement set measured = ${measurement.measured}, temp = ${measurement.temp}, total_hardness = ${measurement.totalHardness},
+        total_chlorine = ${measurement.totalChlorine}, total_bromine = ${measurement.totalBromine}, free_chlorine = ${measurement.freeChlorine},
+        ph = ${measurement.ph}, total_alkalinity = ${measurement.totalAlkalinity}, cyanuric_acid = ${measurement.cyanuricAcid} where id = ${measurement.id}
+        """.stripMargin.update()
     }
     ()
 
