@@ -306,7 +306,13 @@ class SqlStore(conf: Config) extends Store:
     }
     ()
 
-  def listSupplies(): Seq[Supply] = ???
+  def listSupplies(): Seq[Supply] =
+    DB readOnly { implicit session =>
+      sql"select * from supply order by purchased"
+        .map(rs => Supply(rs.int("id"), rs.int("pool_id"), rs.int("purchased"), rs.string("item"), rs.double("amount"), rs.string("unit"), rs.double("cost")))
+        .list()
+    }
+
   def addSupply(supply: Supply): Supply = ???
   def updateSupply(supply: Supply): Unit = ???
 
