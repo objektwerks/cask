@@ -292,7 +292,13 @@ class SqlStore(conf: Config) extends Store:
         .list()
     }
 
-  def addChemical(chemical: Chemical): Chemical = ???
+  def addChemical(chemical: Chemical): Chemical =
+    val id = DB localTx { implicit session =>
+      sql"insert into chemical(pool_id, added, chemical, amount, unit) values(${chemical.poolId}, ${chemical.added}, ${chemical.chemical}, ${chemical.amount}, ${chemical.unit})"
+      .updateAndReturnGeneratedKey().toInt
+    }
+    chemical.copy(id = id)
+
   def updateChemical(chemical: Chemical): Unit = ???
 
   def listSupplies(): Seq[Supply] = ???
