@@ -327,6 +327,11 @@ class SqlStore(conf: Config) extends Store:
     }
     ()
 
-  def listRepairs(): Seq[Repair] = ???
+  def listRepairs(): Seq[Repair] =
+    DB readOnly { implicit session =>
+      sql"select * from repair order by repaired"
+        .map(rs => Repair(rs.int("id"), rs.int("pool_id"), rs.int("repaired"), rs.string("repair"), rs.double("cost")))
+        .list()
+    }
   def addRepair(repair: Repair): Repair = ???
   def updateRepair(repair: Repair): Unit = ???
