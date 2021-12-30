@@ -210,9 +210,46 @@ class SqlStore(conf: Config) extends Store:
     }
     ()
 
-  def listMeasurements(): Seq[Measurement] = ???
-  def addMeasurement(measurement: Measurement): Measurement = ???
-  def updateMeasurement(measurement: Measurement): Unit = ???
+/*
+CREATE TABLE measurement (
+  id SERIAL PRIMARY KEY,
+  pool_id INT REFERENCES pool(id),
+  measured INT NOT NULL,
+  temp INT NOT NULL,
+  total_hardness INT NOT NULL,
+  total_chlorine INT NOT NULL,
+  total_bromine INT NOT NULL,
+  free_chlorine INT NOT NULL,
+  ph NUMERIC(2, 1) NOT NULL,
+  total_alkalinity INT NOT NULL,
+  cyanuric_acid INT NOT NULL
+);
+ */
+  def listMeasurements(): Seq[Measurement] =
+    DB readOnly { implicit session =>
+      sql"select * from measurement order by measured"
+        .map(rs =>
+          Measurement(
+            rs.int("id"), rs.int("pool_id"), rs.int("measured"), rs.int("temp"), rs.int("total_hardness"), rs.int("total_chlorine"),
+            rs.int("total_bromine"), rs.int("free_chlorine"), rs.float("ph"), rs.int("total_alkalinity"), rs.int("cyanuric_acid")
+          )
+        )
+        .list()
+    }
+
+  def addMeasurement(measurement: Measurement): Measurement =
+    val id = DB localTx { implicit session =>
+      sql"insert into heater(pool_id, installed, kind) values(${heater.poolId}, ${heater.installed}, ${heater.model})"
+      .updateAndReturnGeneratedKey().toInt
+    }
+    heater.copy(id = id)
+
+  def updateMeasurement(measurement: Measurement): Unit =
+    DB localTx { implicit session =>
+      sql"update heater set installed = ${heater.installed}, kind = ${heater.model} where id = ${heater.id}"
+      .update()
+    }
+    ()
 
   def listCleanings(): Seq[Cleaning] = ???
   def addCleaning(cleaning: Cleaning): Cleaning = ???
