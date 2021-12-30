@@ -285,7 +285,13 @@ class SqlStore(conf: Config) extends Store:
     }
     ()
 
-  def listChemicals(): Seq[Chemical] = ???
+  def listChemicals(): Seq[Chemical] =
+    DB readOnly { implicit session =>
+      sql"select * from chemical order by added"
+        .map(rs => Chemical(rs.int("id"), rs.int("pool_id"), rs.int("added"), rs.string("chemical"), rs.double("amount"), rs.string("unit")))
+        .list()
+    }
+
   def addChemical(chemical: Chemical): Chemical = ???
   def updateChemical(chemical: Chemical): Unit = ???
 
