@@ -333,5 +333,12 @@ class SqlStore(conf: Config) extends Store:
         .map(rs => Repair(rs.int("id"), rs.int("pool_id"), rs.int("repaired"), rs.string("repair"), rs.double("cost")))
         .list()
     }
-  def addRepair(repair: Repair): Repair = ???
+
+  def addRepair(repair: Repair): Repair =
+    val id = DB localTx { implicit session =>
+      sql"insert into repair(pool_id, repaired, repair, cost) values(${repair.poolId}, ${repair.repaired}, ${repair.repair}, ${repair.cost})"
+      .updateAndReturnGeneratedKey().toInt
+    }
+    repair.copy(id = id)
+
   def updateRepair(repair: Repair): Unit = ???
