@@ -242,7 +242,32 @@ class SqlStore(conf: Config) extends Store:
     }
     ()
 
-  def listCleanings(): Seq[Cleaning] = ???
+/*
+CREATE TABLE cleaning (
+  id SERIAL PRIMARY KEY,
+  pool_id INT REFERENCES pool(id),
+  cleaned INT NOT NULL,
+  brush BOOL NOT NULL,
+  net BOOL NOT NULL,
+  vacuum BOOL NOT NULL,
+  skimmer_basket BOOL NOT NULL,
+  pump_basket BOOL NOT NULL,
+  pump_filter BOOL NOT NULL,
+  deck BOOL NOT NULL
+);
+ */    
+  def listCleanings(): Seq[Cleaning] =
+    DB readOnly { implicit session =>
+      sql"select * from cleaning order by cleaned"
+        .map(rs =>
+          Cleaning(
+            rs.int("id"), rs.int("pool_id"), rs.int("cleaned"), rs.boolean("brush"), rs.boolean("net"), rs.boolean("vacuum"),
+            rs.boolean("skimmer_basket"), rs.boolean("pump_basket"), rs.boolean("pump_filter"), rs.boolean("deck")
+          )
+        )
+        .list()
+    }
+
   def addCleaning(cleaning: Cleaning): Cleaning = ???
   def updateCleaning(cleaning: Cleaning): Unit = ???
 
