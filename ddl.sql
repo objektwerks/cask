@@ -1,6 +1,6 @@
 CREATE TABLE account (
   license VARCHAR(36) PRIMARY KEY,
-  email VARCHAR NOT NULL,
+  email_address VARCHAR NOT NULL,
   pin VARCHAR(9) NOT NULL,
   activated INT NOT NULL,
   deactivated INT NOT NULL
