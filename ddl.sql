@@ -116,6 +116,9 @@ CREATE TABLE email (
   id VARCHAR PRIMARY KEY,
   license VARCHAR(36) NOT NULL,
   address VARCHAR NOT NULL,
+  message VARCHAR NOT NULL,
+  date_sent INT NOT NULL,
+  time_sent INT NOT NULL,
   processed BOOL NOT NULL,
   valid BOOL NOT NULL
 );
