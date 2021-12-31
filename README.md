@@ -32,13 +32,10 @@ Entity
 
 Model
 -----
-* Server 1 ---> 1 Router
-* Router 1 ---> 1 Dispatcher
+* Server 1 ---> 1 Router 1 ---> 1 Dispatcher
 * Service 1 ---> 1 Store
-* Authorizer 1 ---> 1 Service
-* Handler 1 ---> 1 Service
-* Validator 1 ---> 1 Handler
-* Dispatcher 1 ---> 1 Authorizer, Validator
+* Authorizer, Handler 1 ---> 1 Service
+* Dispatcher 1 ---> 1 Authorizer, Validator, Handler
 * Client
 
 Sequence
