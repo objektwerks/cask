@@ -100,7 +100,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
   }
 
   def testRegister(dispatcher: Dispatcher): Account =
-    val command = Register(email = "test@test.com")
+    val command = Register(emailAddress = "test@test.com")
     dispatcher.dispatch(command) match
       case Registered(account) =>
         account.isActivated shouldBe true
@@ -108,7 +108,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
       case event: Event => logger.error(event.toString); fail()
 
   def testLogin(dispatcher: Dispatcher, account: Account): Unit =
-    val command = Login(account.email, account.pin)
+    val command = Login(account.emailAddress, account.pin)
     dispatcher.dispatch(command) match
       case loggedIn: LoggedIn => account shouldBe loggedIn.account
       case event: Event => logger.error(event.toString); fail()
