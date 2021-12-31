@@ -21,7 +21,7 @@ class SqlStore(conf: Config) extends Store:
     val email = Email(id = "1", license = account.license, address = emailAddress, message = "message")
     if Emailer.send(email) then
       DB localTx { implicit session =>
-        sql"insert into account(license, email, pin, activated, deactivated) values(${account.license}, ${account.emailAddress}, ${account.pin}, ${account.activated}, ${account.deactivated})"
+        sql"insert into account(license, email_address, pin, activated, deactivated) values(${account.license}, ${account.emailAddress}, ${account.pin}, ${account.activated}, ${account.deactivated})"
         .update()
       }
       addEmail(email)
@@ -30,8 +30,8 @@ class SqlStore(conf: Config) extends Store:
 
   def login(email: String, pin: String): Option[Account] =
     DB readOnly { implicit session =>
-      sql"select * from account where email = $email and pin = $pin"
-        .map(rs => Account(rs.string("license"), rs.string("email"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
+      sql"select * from account where email_address = $email and pin = $pin"
+        .map(rs => Account(rs.string("license"), rs.string("email_address"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
         .single()
     }
 
@@ -49,7 +49,7 @@ class SqlStore(conf: Config) extends Store:
       .update()
       if deactivated > 0 then
         sql"select * from account where license = $license"
-          .map(rs => Account(rs.string("license"), rs.string("email"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
+          .map(rs => Account(rs.string("license"), rs.string("email_address"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
           .single()
       else None
     }
@@ -60,7 +60,7 @@ class SqlStore(conf: Config) extends Store:
       .update()
       if activated > 0 then
         sql"select * from account where license = $license"
-          .map(rs => Account(rs.string("license"), rs.string("email"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
+          .map(rs => Account(rs.string("license"), rs.string("email_address"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
           .single()
       else None
     }
