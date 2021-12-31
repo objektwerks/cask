@@ -33,7 +33,7 @@ Entity
 Model
 -----
 * Server 1 ---> 1 Router 1 ---> 1 Dispatcher
-* Service 1 ---> 1 Store
+* Service 1 ---> 1 Store 1 ---> 1 Emailer
 * Authorizer, Handler 1 ---> 1 Service
 * Dispatcher 1 ---> 1 Authorizer, Validator, Handler
 * Client
@@ -43,16 +43,14 @@ Sequence
 1. Client --- Command ---> Server
 2. Server --- Command ---> Router
 3. Router --- Command ---> Dispatcher
-4. Dispatcher --- Command ---> Authorizer
-5. Dispatcher --- Command ---> Validator
-6. Dispatcher --- Command ---> Handler
-7. Handler --- T ---> Service
-8. Service --- T ---> Store --- Email ---> Emailer
-9. Service --- Either[Throwable, T] ---> Handler
-10. Handler --- Event ---> Dispatcher
-11. Dispatcher --- Event ---> Router
-12. Router --- Event ---> Server
-13. Server --- Event ---> Client
+4. Dispatcher --- Command ---> Authorizer, Validator, Handler
+5. Handler --- T ---> Service
+6. Service --- T ---> Store --- Email ---> Emailer
+7. Service --- Either[Throwable, T] ---> Handler
+8.  Handler --- Event ---> Dispatcher
+9.  Dispatcher --- Event ---> Router
+10. Router --- Event ---> Server
+11. Server --- Event ---> Client
 
 Resources
 ---------
