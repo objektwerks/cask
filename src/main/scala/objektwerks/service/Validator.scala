@@ -2,11 +2,10 @@ package objektwerks.service
 
 import objektwerks.entity.*
 import objektwerks.entity.Validators.*
-import objektwerks.service.Handler
 
-class Validator(handler: Handler):
-  def validate(command: Command): Event =
-    val isValid = command match
+class Validator():
+  def validate(command: Command): Boolean =
+    command match
       case register: Register => register.isValid
       case login: Login => login.isValid
 
@@ -60,6 +59,3 @@ class Validator(handler: Handler):
       case list: ListRepairs => true
       case add: AddRepair => add.repair.isValid
       case update: UpdateRepair => update.repair.isValid
-
-    if isValid then handler.handle(command)
-    else Fault(s"Invalid command: $command")

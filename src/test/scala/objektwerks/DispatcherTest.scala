@@ -17,8 +17,8 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
     val service = Service(store)
     val authorizer = Authorizer(service)
     val handler = Handler(service)
-    val validator = Validator(handler)
-    val dispatcher = Dispatcher(authorizer, validator)
+    val validator = Validator()
+    val dispatcher = Dispatcher(authorizer, validator, handler)
 
     testDispatcher(dispatcher)
     testEmail(store)
@@ -30,8 +30,8 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
     val service = Service(store)
     val authorizer = Authorizer(service)
     val handler = Handler(service)
-    val validator = Validator(handler)
-    val dispatcher = Dispatcher(authorizer, validator)
+    val validator = Validator()
+    val dispatcher = Dispatcher(authorizer, validator, handler)
 
     testDispatcher(dispatcher)
     testEmail(store)
