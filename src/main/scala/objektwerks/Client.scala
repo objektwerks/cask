@@ -12,7 +12,7 @@ object Client extends LazyLogging:
     val url = "http://localhost:7272/command"
     logger.info(s"*** Server url: $url")
 
-    val register = Register("live@live.com")
+    val register = Register(emailAddress = "live@live.com")
     logger.info(s"*** Register: $register")
 
     val registerJson = write[Register](register)
@@ -27,7 +27,7 @@ object Client extends LazyLogging:
     val account = registered.account
     logger.info(s"*** Account: $account")
 
-    val login = Login(account.emailAddress, account.pin)
+    val login = Login(emailAddress = account.emailAddress, pin = account.pin)
     logger.info(s"*** Login: $login")
 
     val loginJson = write[Login](login)
