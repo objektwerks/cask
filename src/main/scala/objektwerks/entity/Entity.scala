@@ -14,7 +14,7 @@ enum UoM(val abrv: String):
 sealed trait Entity
 
 final case class Account(license: String = newLicense,
-                         email: String,
+                         emailAddress: String,
                          pin: String = newPin,
                          activated: Int = DateTime.currentDate,
                          deactivated: Int = 0) extends Entity
