@@ -21,6 +21,14 @@ Run
 3. See target/cask.log
 4. Close both terminal sessions.
 
+Entity
+------
+1. Account
+2. Pool 1 ---> 1 Surface, Pump, Timer, TimerSetting, Heater, HeaterSetting, Measurement, Cleaning, Chemical, Supply, Repair
+3. Email
+4. Fault
+5. UoM ( unit of measure )
+
 Model
 -----
 1. Server 1 ---> 1 Router
@@ -29,9 +37,8 @@ Model
 4. Authorizer 1 ---> 1 Service
 5. Handler 1 ---> 1 Service
 6. Validator 1 ---> 1 Handler
-7. Dispatcher 1 ---> 1 Authorizer
-8. Dispatcher 1 ---> 1 Validator
-9. Client
+7. Dispatcher 1 ---> 1 Authorizer, Validator
+8. Client
 
 Sequence
 --------
