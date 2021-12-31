@@ -47,7 +47,7 @@ Sequence
 3. Router --- Command ---> Dispatcher
 4. Dispatcher --- Command ---> Authorizer
 5. Dispatcher --- Command ---> Validator
-6. Validator --- Command ---> Handler
+6. Dispatcher --- Command ---> Handler
 7. Handler --- T ---> Service
 8. Service --- T ---> Store --- Email ---> Emailer
 9. Service --- Either[Throwable, T] ---> Handler
