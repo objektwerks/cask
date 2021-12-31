@@ -384,4 +384,8 @@ class SqlStore(conf: Config) extends Store:
         .list()
     }
 
-  def addFault(fault: Fault): Unit = ???
+  def addFault(fault: Fault): Unit =
+    DB localTx { implicit session =>
+      sql"insert into fault(date_of, time_of, nano_of, cause) values(${fault.dateOf}, ${fault.timeOf}, ${fault.nanoOf}, ${fault.cause})"
+        .update()
+    }
