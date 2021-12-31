@@ -349,7 +349,17 @@ class SqlStore(conf: Config) extends Store:
     }
     ()
 
-  def listEmails: Seq[Email] = ???
+  def listEmails: Seq[Email] =
+    DB readOnly { implicit session =>
+      sql"select * from email where processed = false"
+        .map(rs => 
+          Email(rs.string("id"), rs.string("license"), rs.string("address"), rs.string("message"),
+                rs.int("date_sent"), rs.int("time_sent"), rs.boolean("processed"), rs.boolean("valid")
+              )
+        )
+        .list()
+    }
+
   def addEmail(email: Email): Unit = ???
   def updateEmail(email: Email): Unit = ???
 
