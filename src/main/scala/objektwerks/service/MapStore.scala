@@ -160,7 +160,7 @@ class MapStore extends Store:
 
   def updateRepair(repair: Repair): Unit = repairs.update(repair.id, repair)
 
-  def listEmails: Seq[Email] = emails.values.to(Seq)
+  def listEmails: Seq[Email] = emails.values.filter(_.processed == false).to(Seq)
 
   def addEmail(email: Email): Unit = emails.addOne(email.id, email)
 
