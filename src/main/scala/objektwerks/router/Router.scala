@@ -1,15 +1,14 @@
-package objektwerks
+package objektwerks.router
 
-import cask.endpoints.postJson
 import cask.main.Routes
 import cask.model.Request
 import com.typesafe.scalalogging.LazyLogging
 
 import objektwerks.entity.{Command, Event}
 import objektwerks.entity.Serializers.given
-import objektwerks.service.*
+import objektwerks.service.Dispatcher
 
-import upickle.default.*
+import upickle.default.{read, write}
 
 case class Router(dispatcher: Dispatcher) extends Routes with LazyLogging:
   @cask.post("/command")

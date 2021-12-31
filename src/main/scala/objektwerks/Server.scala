@@ -6,6 +6,7 @@ import com.typesafe.scalalogging.LazyLogging
 
 import io.undertow.Undertow
 
+import objektwerks.router.Router
 import objektwerks.service.*
 
 import scala.io.StdIn
