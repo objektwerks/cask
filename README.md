@@ -49,7 +49,7 @@ Sequence
 5. Dispatcher --- Command ---> Validator
 6. Validator --- Command ---> Handler
 7. Handler --- T ---> Service
-8. Service --- T ---> Store --- Email ---> Emailer ( via Store.register )
+8. Service --- T ---> Store --- Email ---> Emailer
 9. Service --- Either[Throwable, T] ---> Handler
 10. Handler --- Event ---> Dispatcher
 11. Dispatcher --- Event ---> Router
