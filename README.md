@@ -23,23 +23,23 @@ Run
 
 Entity
 ------
-1. Pool 1..n ---> 1 Account **
-2. Pool 1 ---> 1 Surface, Pump, Timer, TimerSetting, Heater, HeaterSetting, Measurement, Cleaning, Chemical, Supply, Repair
-3. Email 1..n ---> 1 Account **
-4. Fault
-5. UoM ( unit of measure )
->** Account contains a globally unique License.
+* Pool 1..n ---> 1 Account **
+* Pool 1 ---> 1 Surface, Pump, Timer, TimerSetting, Heater, HeaterSetting, Measurement, Cleaning, Chemical, Supply, Repair
+* Email 1..n ---> 1 Account **
+* Fault
+* UoM ( unit of measure )
+>** Account contains a globally unique license.
 
 Model
 -----
-1. Server 1 ---> 1 Router
-2. Router 1 ---> 1 Dispatcher
-3. Service 1 ---> 1 Store
-4. Authorizer 1 ---> 1 Service
-5. Handler 1 ---> 1 Service
-6. Validator 1 ---> 1 Handler
-7. Dispatcher 1 ---> 1 Authorizer, Validator
-8. Client
+* Server 1 ---> 1 Router
+* Router 1 ---> 1 Dispatcher
+* Service 1 ---> 1 Store
+* Authorizer 1 ---> 1 Service
+* Handler 1 ---> 1 Service
+* Validator 1 ---> 1 Handler
+* Dispatcher 1 ---> 1 Authorizer, Validator
+* Client
 
 Sequence
 --------
