@@ -23,9 +23,9 @@ Run
 
 Entity
 ------
-1. Account
+1. Pool 1..n ---> 1 Account 1 ---> 1 License
 2. Pool 1 ---> 1 Surface, Pump, Timer, TimerSetting, Heater, HeaterSetting, Measurement, Cleaning, Chemical, Supply, Repair
-3. Email
+3. Email 1 ---> 1 License
 4. Fault
 5. UoM ( unit of measure )
 
