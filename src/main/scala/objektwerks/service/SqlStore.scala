@@ -348,3 +348,10 @@ class SqlStore(conf: Config) extends Store:
       .update()
     }
     ()
+
+  def listEmails: Seq[Email] = ???
+  def addEmail(email: Email): Unit = ???
+  def updateEmail(email: Email): Unit = ???
+
+  def listFaults: Seq[Fault] = ???
+  def addFault(fault: Fault): Unit = ???
