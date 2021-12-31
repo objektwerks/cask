@@ -59,3 +59,10 @@ trait Store:
   def listRepairs(): Seq[Repair]
   def addRepair(repair: Repair): Repair
   def updateRepair(repair: Repair): Unit
+
+  def listEmails: Seq[Email]
+  def addEmail(email: Email): Unit
+  def updateEmail(email: Email): Unit
+
+  def listFaults: Seq[Fault]
+  def addFault(fault: Fault): Unit
