@@ -1,6 +1,6 @@
 Cask
 ----
->Cask feature tests, to include a model, using uPickle, Requests, Scala-Java-Time, Scalikejdbc, H2 and Scala 3.
+>Cask feature tests, to include a model using uPickle, Requests, Scala-Java-Time, Scalikejdbc, H2 and Scala 3.
 
 Test
 ----
@@ -47,8 +47,8 @@ Sequence
 5. Handler --- T ---> Service
 6. Service --- T ---> Store --- Email ---> Emailer
 7. Service --- Either[Throwable, T] ---> Handler
-8.  Handler --- Event ---> Dispatcher
-9.  Dispatcher --- Event ---> Router
+8. Handler --- Event ---> Dispatcher
+9. Dispatcher --- Event ---> Router
 10. Router --- Event ---> Server
 11. Server --- Event ---> Client
 
