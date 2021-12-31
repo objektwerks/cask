@@ -27,7 +27,7 @@ object Client extends LazyLogging:
     val account = registered.account
     logger.info(s"*** Account: $account")
 
-    val login = Login(account.email, account.pin)
+    val login = Login(account.emailAddress, account.pin)
     logger.info(s"*** Login: $login")
 
     val loginJson = write[Login](login)
