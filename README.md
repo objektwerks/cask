@@ -1,6 +1,6 @@
 Cask
 ----
->Cask feature tests, to include model, using uPickle, Requests, Scala-Java-Time, Scalikejdbc, H2 and Scala 3.
+>Cask feature tests, to include a model, using uPickle, Requests, Scala-Java-Time, Scalikejdbc, H2 and Scala 3.
 
 Test
 ----
@@ -23,20 +23,37 @@ Run
 
 Model
 -----
-1. Client --- Command ---> Server
-2. Server --- Command ---> Dispatcher
-3. Dispatcher --- Command ---> Authorizer
-4. Dispatcher --- Command ---> Validator
-5. Validator --- Command ---> Handler
-6. Handler --- T ---> Service
-7. Service --- T ---> Store --- Email ---> Emailer ( via Store.register )
-8. Service --- Either[Throwable, T] ---> Handler
-9. Handler --- Event ---> Dispatcher
-10. Dispatcher --- Event ---> Server
-11. Server --- Event ---> Client
+1. Server 1 ---> 1 Router
+2. Router 1 ---> 1 Dispatcher
+3. Service 1 ---> 1 Store
+4. Authorizer 1 ---> 1 Service
+5. Handler 1 ---> 1 Service
+6. Validator 1 ---> 1 Handler
+7. Dispatcher 1 ---> 1 Authorizer
+8. Dispatcher 1 ---> 1 Validator
+9. Client
 
-Docs
-----
+Sequence
+--------
+1. Client --- Command ---> Server
+2. Server --- Command ---> Router
+3. Router --- Command ---> Dispatcher
+4. Dispatcher --- Command ---> Authorizer
+5. Dispatcher --- Command ---> Validator
+6. Validator --- Command ---> Handler
+7. Handler --- T ---> Service
+8. Service --- T ---> Store --- Email ---> Emailer ( via Store.register )
+9. Service --- Either[Throwable, T] ---> Handler
+10. Handler --- Event ---> Dispatcher
+11. Dispatcher --- Event ---> Router
+12. Router --- Event ---> Server
+13. Server --- Event ---> Client
+
+Resources
+---------
 1. Cask - https://com-lihaoyi.github.io/cask/index.html
 2. uPickle - https://com-lihaoyi.github.io/upickle/
 3. Requests - https://github.com/com-lihaoyi/requests-scala
+4. ScalikeJdbc - http://scalikejdbc.org
+5. H2 - https://h2database.com/html/main.html
+6. Scala-Java-Time - https://github.com/cquiroz/scala-java-time
