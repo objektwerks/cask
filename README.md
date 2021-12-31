@@ -23,11 +23,12 @@ Run
 
 Entity
 ------
-1. Pool 1..n ---> 1 Account 1 ---> 1 License
+1. Pool 1..n ---> 1 Account **
 2. Pool 1 ---> 1 Surface, Pump, Timer, TimerSetting, Heater, HeaterSetting, Measurement, Cleaning, Chemical, Supply, Repair
-3. Email 1 ---> 1 License
+3. Email 1..n ---> 1 Account **
 4. Fault
 5. UoM ( unit of measure )
+>** Account contains a globally unique License.
 
 Model
 -----
