@@ -19,7 +19,10 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
     val handler = Handler(service)
     val validator = Validator(handler)
     val dispatcher = Dispatcher(authorizer, validator)
+
     testDispatcher(dispatcher)
+
+    store.listEmails.size shouldBe 1
   }
 
   test("dispatcher using sql store") {
@@ -29,7 +32,10 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
     val handler = Handler(service)
     val validator = Validator(handler)
     val dispatcher = Dispatcher(authorizer, validator)
+
     testDispatcher(dispatcher)
+    
+    store.listEmails.size shouldBe 1
   }
 
   def testDispatcher(dispatcher: Dispatcher): Unit = {
