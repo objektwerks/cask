@@ -7,10 +7,10 @@ object Validators:
     def isPin: Boolean = value.length == 9
 
   extension (register: Register)
-    def isValid: Boolean = register.email.isEmailAddress
+    def isValid: Boolean = register.emailAddress.isEmailAddress
 
   extension (login: Login)
-    def isValid: Boolean = login.email.isEmailAddress && login.pin.isPin
+    def isValid: Boolean = login.emailAddress.isEmailAddress && login.pin.isPin
 
   extension (deactivate: Deactivate)
     def isValid: Boolean = deactivate.license.isLicense
