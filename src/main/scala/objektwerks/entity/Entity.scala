@@ -39,6 +39,8 @@ final case class Email(id: String,
                        license: String,
                        address: String,
                        message: String,
+                       dateSent: Int = DateTime.currentDate,
+                       timeSent: Int = DateTime.currentTime,
                        processed: Boolean = false,
                        valid: Boolean = false) extends Entity
 
