@@ -360,7 +360,16 @@ class SqlStore(conf: Config) extends Store:
         .list()
     }
 
-  def addEmail(email: Email): Unit = ???
+  def addEmail(email: Email): Unit =
+    DB localTx { implicit session =>
+      sql"""insert into email(id, license, address, message, date_sent, time_sent, processed, valid)
+            values(${email.id}, ${email.license}, ${email.address}, ${email.message}, ${email.dateSent},
+             ${email.timeSent}, ${email.processed}, ${email.valid})
+         """
+        .stripMargin
+        .update()
+    }
+
   def updateEmail(email: Email): Unit = ???
 
   def listFaults: Seq[Fault] = ???
