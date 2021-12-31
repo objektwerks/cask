@@ -370,7 +370,12 @@ class SqlStore(conf: Config) extends Store:
         .update()
     }
 
-  def updateEmail(email: Email): Unit = ???
+  def updateEmail(email: Email): Unit =
+    DB localTx { implicit session =>
+      sql"update email set processed = ${email.processed}, valid = ${email.valid} where id = ${email.id}"
+        .update()
+    }
+    ()
 
   def listFaults: Seq[Fault] = ???
   def addFault(fault: Fault): Unit = ???
