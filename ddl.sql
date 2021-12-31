@@ -114,7 +114,7 @@ CREATE TABLE repair (
 
 CREATE TABLE email (
   id VARCHAR PRIMARY KEY,
-  license VARCHAR(36) NOT NULL,
+  license VARCHAR(36) REFERENCES account(license),
   address VARCHAR NOT NULL,
   message VARCHAR NOT NULL,
   date_sent INT NOT NULL,
