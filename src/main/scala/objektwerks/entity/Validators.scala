@@ -3,14 +3,14 @@ package objektwerks.entity
 object Validators:
   extension (value: String)
     def isLicense: Boolean = if value.nonEmpty then value.length == 36 else false
-    def isEmail: Boolean = value.nonEmpty && value.length >= 3 && value.contains("@")
+    def isEmailAddress: Boolean = value.nonEmpty && value.length >= 3 && value.contains("@")
     def isPin: Boolean = value.length == 9
 
   extension (register: Register)
-    def isValid: Boolean = register.email.isEmail
+    def isValid: Boolean = register.email.isEmailAddress
 
   extension (login: Login)
-    def isValid: Boolean = login.email.isEmail && login.pin.isPin
+    def isValid: Boolean = login.email.isEmailAddress && login.pin.isPin
 
   extension (deactivate: Deactivate)
     def isValid: Boolean = deactivate.license.isLicense
@@ -21,13 +21,13 @@ object Validators:
   extension (account: Account)
     def isActivated: Boolean =
       account.license.isLicense &&
-        account.email.isEmail &&
+        account.emailAddress.isEmailAddress &&
         account.pin.isPin &&
         account.activated > 0 &&
         account.deactivated == 0
     def isDeactivated: Boolean =
       account.license.isLicense &&
-        account.email.isEmail &&
+        account.emailAddress.isEmailAddress &&
         account.pin.isPin &&
         account.activated == 0 &&
         account.deactivated > 0
