@@ -377,5 +377,11 @@ class SqlStore(conf: Config) extends Store:
     }
     ()
 
-  def listFaults: Seq[Fault] = ???
+  def listFaults: Seq[Fault] =
+    DB readOnly { implicit session =>
+      sql"select * from fault order by date_of, time_of desc"
+        .map(rs => Fault(rs.int("date_of"), rs.int("time_of"), rs.int("nano_of"), rs.string("cause")))
+        .list()
+    }
+
   def addFault(fault: Fault): Unit = ???
