@@ -19,6 +19,7 @@ class MapStore extends Store:
   private val chemicals = mutable.Map.empty[Int, Chemical]
   private val supplies = mutable.Map.empty[Int, Supply]
   private val repairs = mutable.Map.empty[Int, Repair]
+  private val emails = mutable.Map.empty[String, Email]
 
   def register(email: String): Option[Account] =
     val account = Account(email = email)
@@ -157,9 +158,10 @@ class MapStore extends Store:
 
   def updateRepair(repair: Repair): Unit = repairs.update(repair.id, repair)
 
-  def listEmails: Seq[Email] = ???
-  def addEmail(email: Email): Unit = ???
-  def updateEmail(email: Email): Unit = ???
+  def listEmails: Seq[Email] = emails.values.to(Seq)
+  def addEmail(email: Email): Unit = emails.addOne(email.id, email)
+
+  def updateEmail(email: Email): Unit = emails.update(email.id, email)
 
   def listFaults: Seq[Fault] = ???
   def addFault(fault: Fault): Unit = ???
