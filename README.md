@@ -1,6 +1,6 @@
 Cask
 ----
->Cask feature tests, to include a model using uPickle, Requests, Scala-Java-Time, Scalikejdbc, H2 and Scala 3.
+>Cask feature tests, to include a model, client and server using uPickle, Requests, Scala-Java-Time, Scalikejdbc, H2 and Scala 3.
 
 Test
 ----
