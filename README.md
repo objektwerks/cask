@@ -23,7 +23,7 @@ Run
 >Select 1.
 3. See target/cask.log
 4. Close both terminal sessions.
->To run WebServer:
+>To run WebServer ( http://localhost:7070/ ):
 1. objektwerks.Client
 2. objektwerks.Server
 3. objektwerks.WebServer
