@@ -69,3 +69,4 @@ Resources
 4. ScalikeJdbc - http://scalikejdbc.org
 5. H2 - https://h2database.com/html/main.html
 6. Scala-Java-Time - https://github.com/cquiroz/scala-java-time
+7. Scalatags - https://com-lihaoyi.github.io/scalatags/#ScalaTags
