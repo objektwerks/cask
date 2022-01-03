@@ -9,26 +9,24 @@ Test
 
 Run
 ---
+* sbt run
+>Multiple main classes detected. Select one to run:
+1. objektwerks.Client
+2. objektwerks.Server
+3. objektwerks.WebServer
+
 >To run Server and Client:
 1. sbt run ( new session )
->Multiple main classes detected. Select one to run:
-1. objektwerks.Client
-2. objektwerks.Server
-3. objektwerks.WebServer
->Select 2.
-2. sbt run ( new session )
->Multiple main classes detected. Select one to run:
-1. objektwerks.Client
-2. objektwerks.Server
-3. objektwerks.WebServer
->Select 1.
-3. See target/cask.log
-4. Close both terminal sessions.
->To run WebServer ( http://localhost:7070/ ):
-1. objektwerks.Client
-2. objektwerks.Server
-3. objektwerks.WebServer
->Select 3.
+2. select 2
+3. sbt run ( new session )
+4. select 1
+5. See target/cask.log
+6. Close both terminal sessions.
+
+>To run WebServer:
+1. sbt run
+2. select 3
+3. open browser to: http://localhost:7070/scalatags or http://localhost:7070/scaladom
 
 Entity
 ------
