@@ -14,6 +14,7 @@ object WebServer extends Main with LazyLogging:
   val allRoutes = Seq(WebRouter())
 
   override def port: Int = 7070
+
   override def host: String = "localhost"
 
   override def main(args: Array[String]): Unit =

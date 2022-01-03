@@ -22,6 +22,7 @@ object Server extends Main with LazyLogging:
   val allRoutes = Seq(Router(dispatcher))
 
   override def port: Int = 7272
+
   override def host: String = "localhost"
 
   override def main(args: Array[String]): Unit =
