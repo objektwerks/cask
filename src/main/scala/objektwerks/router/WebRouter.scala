@@ -13,4 +13,4 @@ case class WebRouter() extends Routes:
       )
     ).render
 
-  initialize()  
+  initialize()
