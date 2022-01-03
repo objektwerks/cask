@@ -33,4 +33,3 @@ object WebServer extends Main with LazyLogging:
     val stopped = s"*** Web Server stopped!"
     println(stopped)
     logger.info(stopped)
-
