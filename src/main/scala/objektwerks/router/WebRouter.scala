@@ -10,11 +10,19 @@ import scalatags.Text.all.*
  * for missing doctype("html")( ... )
 */
 case class WebRouter() extends Routes:
-  @cask.get("/")
-  def hello() =
+  @cask.get("/scalatags")
+  def scalatags() =
     html(
       body(
         h1("Hello, Cask and Scalatags!")
+      )
+    ).toString
+
+  @cask.get("/scaladom")
+  def scaladom() =
+    html(
+      body(
+        h1("Hello, Cask and Scaladom!")
       )
     ).render
 
