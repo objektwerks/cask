@@ -8,18 +8,26 @@ Test
 
 Run
 ---
+>To run Server and Client:
 1. sbt run ( new session )
 >Multiple main classes detected. Select one to run:
 1. objektwerks.Client
 2. objektwerks.Server
+3. objektwerks.WebServer
 >Select 2.
 2. sbt run ( new session )
 >Multiple main classes detected. Select one to run:
 1. objektwerks.Client
 2. objektwerks.Server
+3. objektwerks.WebServer
 >Select 1.
 3. See target/cask.log
 4. Close both terminal sessions.
+>To run WebServer:
+1. objektwerks.Client
+2. objektwerks.Server
+3. objektwerks.WebServer
+>Select 3.
 
 Entity
 ------
