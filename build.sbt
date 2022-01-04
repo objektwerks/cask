@@ -12,7 +12,7 @@ libraryDependencies ++= {
     "io.github.cquiroz" %% "scala-java-time" % "2.3.0",
     "com.lihaoyi" %% "scalatags" % "0.11.0",
     "com.typesafe" % "config" % "1.4.1",
-    "ch.qos.logback" % "logback-classic" % "1.2.9",
+    "ch.qos.logback" % "logback-classic" % "1.2.10",
     "com.typesafe.scala-logging" %% "scala-logging" % "3.9.4",
     "org.scalatest" %% "scalatest" % "3.2.10" % Test
   )
