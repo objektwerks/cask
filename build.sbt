@@ -5,7 +5,7 @@ scalaVersion := "3.1.0"
 libraryDependencies ++= {
   Seq(
     "com.lihaoyi" %% "cask" % "0.8.0",
-    "com.lihaoyi" %% "upickle" % "1.4.3",
+    "com.lihaoyi" %% "upickle" % "1.4.4",
     "com.lihaoyi" %% "requests" % "0.7.0",
     "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
     "com.h2database" % "h2" % "2.0.204",
