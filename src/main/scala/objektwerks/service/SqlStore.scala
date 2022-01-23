@@ -8,7 +8,6 @@ import objektwerks.entity.*
 import scalikejdbc._
 
 class SqlStore(conf: Config) extends Store:
-  val driver = conf.getString("db.driver")
   val url = conf.getString("db.url")
   val user = conf.getString("db.user")
   val password = conf.getString("db.password")
