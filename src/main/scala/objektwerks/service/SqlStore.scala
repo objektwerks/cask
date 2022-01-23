@@ -13,7 +13,6 @@ class SqlStore(conf: Config) extends Store:
   val user = conf.getString("db.user")
   val password = conf.getString("db.password")
 
-  Class.forName(driver)
   ConnectionPool.singleton(url, user, password)
 
   def register(emailAddress: String): Option[Account] =
