@@ -1,7 +1,7 @@
 name := "cask"
 organization := "objektwerks"
 version := "0.1-SNAPSHOT"
-scalaVersion := "3.1.0"
+scalaVersion := "3.1.1"
 libraryDependencies ++= {
   Seq(
     "com.lihaoyi" %% "cask" % "0.8.0",
