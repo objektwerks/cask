@@ -26,7 +26,7 @@ Run
 >To run WebServer:
 1. sbt run
 2. select 3
-3. open browser to: http://localhost:7070/scalatags or http://localhost:7070/scaladom
+3. open browser to: http://localhost:7070/scalatags
 
 Entity
 ------
