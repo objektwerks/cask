@@ -12,20 +12,26 @@ Run
 * sbt run
 >Multiple main classes detected. Select one to run:
 1. objektwerks.Client
-2. objektwerks.Server
-3. objektwerks.WebServer
+2. objektwerks.ResourceServer
+3. objektwerks.Server
+4. objektwerks.WebServer
 
 >To run Server and Client:
 1. sbt run ( new session )
-2. select 2
+2. select 3
 3. sbt run ( new session )
 4. select 1
 5. See target/cask.log
 6. Close both terminal sessions.
 
+>To run ResourceServer:
+1. sbt run
+2. select 2
+3. open browser to: http://localhost:7171/scalatags
+
 >To run WebServer:
 1. sbt run
-2. select 3
+2. select 4
 3. open browser to: http://localhost:7070/scalatags
 
 Entity
