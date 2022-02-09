@@ -71,7 +71,7 @@ Sequence
 
 Resources
 ---------
-> See router.Resources and router.ResourcesRouter for an approach to loading:
+> See router.Resources and router.ResourceRouter for an approach to loading:
 1. index.html at /base-path/index.html
 2. web resources at /base-path/
 
