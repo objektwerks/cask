@@ -14,7 +14,7 @@ class ResourceRouter()
   with Resources(
     basePath = "/public/",
     indexHtml = "index.html",
-    cache = ResourcesCache(minSize = 4, maxSize = 10, expireAfter = 24.hour)):
+    cache = Resources.cache(minSize = 4, maxSize = 10, expireAfter = 24.hour)):
   @cask.get("/")
   def index() = Response(loadResource(indexHtml), 200, Seq(htmlHeader))
 
