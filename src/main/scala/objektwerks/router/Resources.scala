@@ -54,7 +54,9 @@ trait Resources(val basePath: String) extends LazyLogging:
 
   def loadImage(resource: String): Array[Byte] =
     cache.getIfPresent(resource) match
-      case Some(bytes) => bytes
+      case Some(bytes) =>
+        logger.debug(s"*** cache get: $resource")
+        bytes
       case None =>
         val path = toPath(resource)
         logger.debug(s"*** load image: $path")
@@ -65,11 +67,14 @@ trait Resources(val basePath: String) extends LazyLogging:
         ImageIO.write(image, contentType, baos)
         val bytes = baos.toByteArray
         cache.put(resource, bytes)
+        logger.debug(s"*** cache put: $resource")
         bytes
 
   def loadResource(resource: String): Array[Byte] =
     cache.getIfPresent(resource) match
-      case Some(bytes) => bytes
+      case Some(bytes) =>
+        logger.debug(s"*** cache get: $resource")
+        bytes
       case None =>
         val path = toPath(resource)
         logger.debug(s"*** load resource: $path")
@@ -77,4 +82,5 @@ trait Resources(val basePath: String) extends LazyLogging:
           source => source.mkString.getBytes
         }.getOrElse(Array.empty[Byte])
         cache.put(resource, bytes)
+        logger.debug(s"*** cache put: $resource")
         bytes
