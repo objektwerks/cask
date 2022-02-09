@@ -70,6 +70,12 @@ Resources
 1. index.html at /base-path/index.html
 2. web resources at /base-path/*.*
 
+Logs
+----
+>See logs at target/
+1. cask.log
+2. test.log
+
 Documentation
 -------------
 1. Cask - https://com-lihaoyi.github.io/cask/index.html
