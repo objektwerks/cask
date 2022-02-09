@@ -4,7 +4,7 @@ import cask.main.Routes
 import cask.model.{Request, Response}
 import com.typesafe.scalalogging.LazyLogging
 
-class ResourceRouter() extends Routes with LazyLogging with Resources("/public/"):
+class ResourceRouter() extends Routes with LazyLogging with Resources("/public/", "index.html"):
   @cask.get("/")
   def index() = Response(loadResource(indexHtml), 200, Seq(htmlHeader))
 
