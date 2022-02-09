@@ -20,8 +20,8 @@ Run
 2. select 3
 3. sbt run ( new session )
 4. select 1
-5. See target/cask.log
-6. Close both terminal sessions.
+5. Close both terminal sessions.
+6. See target/cask.log
 
 >To run ResourceServer:
 1. sbt run
