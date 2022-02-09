@@ -74,3 +74,4 @@ Resources
 5. H2 - https://h2database.com/html/main.html
 6. Scala-Java-Time - https://github.com/cquiroz/scala-java-time
 7. Scalatags - https://com-lihaoyi.github.io/scalatags/#ScalaTags
+8. Scaffiene - https://github.com/blemale/scaffeine
