@@ -27,12 +27,12 @@ Run
 >To run ResourceServer:
 1. sbt run
 2. select 2
-3. open browser to: http://localhost:7171/scalatags
+3. open browser to: http://localhost:7070/
 
 >To run WebServer:
 1. sbt run
 2. select 4
-3. open browser to: http://localhost:7070/scalatags
+3. open browser to: http://localhost:7171/scalatags
 
 Entity
 ------
