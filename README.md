@@ -64,6 +64,12 @@ Sequence
 10. Router --- Event ---> Server
 11. Server --- Event ---> Client
 
+Resources
+---------
+> See router.Resources and router.ResourcesRouter for an approach to loading:
+1. index.html at /base-path/index.html
+2. web resources at /base-path/*.*
+
 Documentation
 -------------
 1. Cask - https://com-lihaoyi.github.io/cask/index.html
