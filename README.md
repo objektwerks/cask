@@ -71,10 +71,9 @@ Sequence
 
 Resources
 ---------
-> See router.Resources and router.ResourceRouter for an approach to loading:
+> See router.Resources and router.ResourceRouter on resource loading:
 1. index.html at /base-path/index.html
 2. web resources at /base-path/
->The index.html value is passed into the Resources trait constructor, allowing for a different name.
 
 Logs
 ----
