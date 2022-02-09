@@ -73,7 +73,7 @@ Resources
 ---------
 > See router.Resources and router.ResourcesRouter for an approach to loading:
 1. index.html at /base-path/index.html
-2. web resources at /base-path/*.*
+2. web resources at /base-path/
 
 Logs
 ----
