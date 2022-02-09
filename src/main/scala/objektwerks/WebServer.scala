@@ -13,7 +13,7 @@ import scala.io.StdIn
 object WebServer extends Main with LazyLogging:
   val allRoutes = Seq(WebRouter())
 
-  override def port: Int = 7070
+  override def port: Int = 7171
 
   override def host: String = "localhost"
 
