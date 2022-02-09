@@ -44,7 +44,7 @@ trait Resources(val basePath: String) extends LazyLogging:
       case "png"  => pngHeader
       case "js"   => jsHeader
       case "map"  => jsmapHeader
-      case "html" => indexHtmlHeader
+      case "html" => htmlHeader
       case _      => textHeader
   
   def isImage(resource: String): Boolean =
