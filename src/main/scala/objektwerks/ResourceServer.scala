@@ -13,7 +13,7 @@ import objektwerks.router.ResourceRouter
 object ResourceServer extends Main with LazyLogging:
   val allRoutes = Seq(ResourceRouter())
 
-  override def port: Int = 7171
+  override def port: Int = 7070
 
   override def host: String = "localhost"
 
