@@ -75,6 +75,10 @@ Resources
 1. index.html at /base-path/index.html
 2. web resources at /base-path/
 
+Cache
+-----
+>See router.Resources
+
 Logs
 ----
 >See logs at target/
