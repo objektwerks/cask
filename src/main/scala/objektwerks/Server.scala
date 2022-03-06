@@ -19,7 +19,7 @@ object Server extends Main with LazyLogging:
   val validator = Validator()
   val dispatcher = Dispatcher(authorizer, validator, handler)
   
-  val allRoutes = Seq(Router(dispatcher))
+  override val allRoutes = Seq(Router(dispatcher))
 
   override def port: Int = 7272
 
