@@ -5,7 +5,9 @@ import com.typesafe.config.ConfigFactory
 import com.typesafe.scalalogging.LazyLogging
 
 import io.undertow.Undertow
+import io.undertow.server.handlers.BlockingHandler
 
+import objektwerks.handler.CorsHandler
 import objektwerks.router.Router
 import objektwerks.service.*
 
@@ -25,6 +27,14 @@ object Server extends Main with LazyLogging:
 
   override def host: String = "localhost"
 
+  override def defaultHandler: BlockingHandler =
+    new BlockingHandler( CorsHandler(dispatchTrie,
+                                     mainDecorators,
+                                     debugMode = false,
+                                     handleNotFound,
+                                     handleMethodNotAllowed,
+                                     handleEndpointError) )
+ 
   override def main(args: Array[String]): Unit =
     Main.silenceJboss()
     val server = Undertow.builder
