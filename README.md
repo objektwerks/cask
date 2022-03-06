@@ -79,6 +79,10 @@ Cache
 -----
 >See router.Resources
 
+Cors Handler
+------------
+>See objektewerks.handler.CorsHandler and objektwerks.Server
+
 Logs
 ----
 >See logs at target/
