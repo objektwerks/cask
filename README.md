@@ -82,6 +82,7 @@ Cache
 Cors Handler
 ------------
 >See objektewerks.handler.CorsHandler and objektwerks.Server
+>Also see https://github.com/Download/undertow-cors-filter
 
 Logs
 ----
