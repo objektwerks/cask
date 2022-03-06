@@ -26,7 +26,7 @@ object Server extends Main with LazyLogging:
   override def host: String = "localhost"
 
   override def main(args: Array[String]): Unit =
-    if (!verbose) Main.silenceJboss()
+    Main.silenceJboss()
     val server = Undertow.builder
       .addHttpListener(port, host)
       .setHandler(defaultHandler)
