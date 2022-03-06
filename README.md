@@ -21,21 +21,21 @@ Run
 3. sbt run ( new session )
 4. select 1
 5. view client result
-6. close both terminal sessions.
+6. close both sessions
 7. see target/cask.log
 
 >To run ResourceServer:
 1. sbt run
 2. select 2
 3. open browser to: http://localhost:7070/
-4. press **return key** to stop server.
+4. press **return key** to stop server
 5. see target/cask.log
 
 >To run WebServer:
 1. sbt run
 2. select 4
 3. open browser to: http://localhost:7171/scalatags
-4. press **return key** to stop server.
+4. press **return key** to stop server
 5. see target/cask.log
 
 Entity
