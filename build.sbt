@@ -9,7 +9,7 @@ libraryDependencies ++= {
     "com.lihaoyi" %% "upickle" % "1.5.0",
     "com.lihaoyi" %% "requests" % "0.7.0",
     "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
-    "com.h2database" % "h2" % "2.1.210",
+    "com.h2database" % "h2" % "2.1.212",
     "io.github.cquiroz" %% "scala-java-time" % "2.3.0",
     "com.lihaoyi" %% "scalatags" % "0.11.1",
     "com.twelvemonkeys.imageio" % "imageio-core" % twelveMonkeysVersion,
