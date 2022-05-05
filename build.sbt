@@ -3,7 +3,7 @@ organization := "objektwerks"
 version := "0.1-SNAPSHOT"
 scalaVersion := "3.1.2"
 libraryDependencies ++= {
-  lazy val twelveMonkeysVersion = "3.8.1"
+  lazy val twelveMonkeysVersion = "3.8.2"
   Seq(
     "com.lihaoyi" %% "cask" % "0.8.0",
     "com.lihaoyi" %% "upickle" % "2.0.0",
