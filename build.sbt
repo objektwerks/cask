@@ -14,7 +14,7 @@ libraryDependencies ++= {
     "com.lihaoyi" %% "scalatags" % "0.11.1",
     "com.twelvemonkeys.imageio" % "imageio-core" % twelveMonkeysVersion,
     "com.twelvemonkeys.imageio" % "imageio-bmp" % twelveMonkeysVersion,
-    "com.github.blemale" %% "scaffeine" % "5.2.0",
+    "com.github.blemale" %% "scaffeine" % "5.2.1",
     "com.typesafe" % "config" % "1.4.2",
     "ch.qos.logback" % "logback-classic" % "1.4.5",
     "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
