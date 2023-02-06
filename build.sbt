@@ -7,7 +7,7 @@ libraryDependencies ++= {
   Seq(
     "com.lihaoyi" %% "cask" % "0.8.3",
     "com.lihaoyi" %% "upickle" % "2.0.0",
-    "com.lihaoyi" %% "requests" % "0.7.0",
+    "com.lihaoyi" %% "requests" % "0.8.0",
     "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
     "com.h2database" % "h2" % "2.1.214",
     "io.github.cquiroz" %% "scala-java-time" % "2.3.0",
