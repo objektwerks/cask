@@ -4,8 +4,6 @@ import cask.main.Routes
 import cask.model.{Request, Response}
 import com.typesafe.scalalogging.LazyLogging
 
-import java.util.concurrent.TimeUnit
-
 import scala.concurrent.duration._
 
 class ResourceRouter()
