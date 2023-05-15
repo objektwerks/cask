@@ -1,7 +1,6 @@
 package objektwerks
 
 import cask.main.Main
-import com.typesafe.config.ConfigFactory
 import com.typesafe.scalalogging.LazyLogging
 
 import io.undertow.Undertow
