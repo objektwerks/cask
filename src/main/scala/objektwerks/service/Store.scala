@@ -1,6 +1,5 @@
 package objektwerks.service
 
-import objektwerks.datetime.DateTime
 import objektwerks.entity.*
 
 trait Store:
