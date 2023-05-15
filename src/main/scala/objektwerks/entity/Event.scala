@@ -1,7 +1,6 @@
 package objektwerks.entity
 
 import objektwerks.datetime.DateTime
-import objektwerks.entity.{Account, Entity}
 
 sealed trait Event
 
