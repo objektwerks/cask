@@ -1,16 +1,14 @@
 package objektwerks.router
 
-import com.github.blemale.scaffeine.{ Cache, Scaffeine }
+import com.github.blemale.scaffeine.{Cache, Scaffeine}
 import com.typesafe.scalalogging.LazyLogging
 
-import java.awt.image.BufferedImage
 import java.io.ByteArrayOutputStream
-import java.util.concurrent.TimeUnit
 import javax.imageio.ImageIO
 
-import scala.concurrent.duration._
+import scala.concurrent.duration.*
 import scala.io.{Codec, Source}
-import scala.util.{Try, Using}
+import scala.util.Using
 
 object Resources:
   def cache(minSize: Int, maxSize: Int, expireAfter: FiniteDuration): Cache[String, Array[Byte]] =
