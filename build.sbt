@@ -1,7 +1,7 @@
 name := "cask"
 organization := "objektwerks"
 version := "0.1-SNAPSHOT"
-scalaVersion := "3.3.1-RC6"
+scalaVersion := "3.3.1-RC7"
 libraryDependencies ++= {
   lazy val twelveMonkeysVersion = "3.9.4"
   Seq(
