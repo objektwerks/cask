@@ -11,8 +11,8 @@ import objektwerks.entity.UoM.*
 import objektwerks.entity.Validators.*
 import objektwerks.service.*
 
-class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
-  test("dispatcher using map store") {
+final class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
+  test("dispatcher using map store"):
     val store = MapStore()
     val service = Service(store)
     val authorizer = Authorizer(service)
@@ -23,9 +23,8 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
     testDispatcher(dispatcher)
     testEmail(store)
     testFault(store)
-  }
 
-  test("dispatcher using sql store") {
+  test("dispatcher using sql store"):
     val store = SqlStore(ConfigFactory.load("test.store.conf"))
     val service = Service(store)
     val authorizer = Authorizer(service)
@@ -36,9 +35,8 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
     testDispatcher(dispatcher)
     testEmail(store)
     testFault(store)
-  }
 
-  def testDispatcher(dispatcher: Dispatcher): Unit = {
+  def testDispatcher(dispatcher: Dispatcher): Unit =
     var account = testRegister(dispatcher)
     testLogin(dispatcher, account)
     account = testDeactivate(dispatcher, account)
@@ -103,7 +101,6 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
     repair = testAddRepair(dispatcher, pool, repair)
     testListRepairs(dispatcher, pool)
     testUpdateRepair(dispatcher, pool, repair.copy(cost = 105.0))
-  }
 
   def testRegister(dispatcher: Dispatcher): Account =
     val command = Register(emailAddress = "test@test.com")
