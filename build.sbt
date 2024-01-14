@@ -6,7 +6,7 @@ libraryDependencies ++= {
   lazy val twelveMonkeysVersion = "3.10.1"
   Seq(
     "com.lihaoyi" %% "cask" % "0.9.1",
-    "com.lihaoyi" %% "upickle" % "3.1.3",
+    "com.lihaoyi" %% "upickle" % "3.1.4",
     "com.lihaoyi" %% "requests" % "0.8.0",
     "org.scalikejdbc" %% "scalikejdbc" % "4.1.0",
     "com.h2database" % "h2" % "2.2.224",
