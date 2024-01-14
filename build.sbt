@@ -5,7 +5,7 @@ scalaVersion := "3.4.0-RC1"
 libraryDependencies ++= {
   lazy val twelveMonkeysVersion = "3.10.1"
   Seq(
-    "com.lihaoyi" %% "cask" % "0.9.1",
+    "com.lihaoyi" %% "cask" % "0.9.2",
     "com.lihaoyi" %% "upickle" % "3.1.4",
     "com.lihaoyi" %% "requests" % "0.8.0",
     "org.scalikejdbc" %% "scalikejdbc" % "4.1.0",
