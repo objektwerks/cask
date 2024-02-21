@@ -8,7 +8,7 @@ libraryDependencies ++= {
     "com.lihaoyi" %% "cask" % "0.9.2",
     "com.lihaoyi" %% "upickle" % "3.2.0",
     "com.lihaoyi" %% "requests" % "0.8.0",
-    "org.scalikejdbc" %% "scalikejdbc" % "4.2.0",
+    "org.scalikejdbc" %% "scalikejdbc" % "4.2.1",
     "com.h2database" % "h2" % "2.2.224",
     "io.github.cquiroz" %% "scala-java-time" % "2.5.0",
     "com.lihaoyi" %% "scalatags" % "0.12.0",
